@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Data
 @Entity
-public class Order {
+public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
