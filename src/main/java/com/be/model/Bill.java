@@ -13,11 +13,9 @@ public class Bill {
     private int id;
     private Date dateCheckin;
     private Date dateCheckout;
-    private double price;
+    private double totalPrice;
     @ManyToOne
     private Account account;
-    @ManyToOne
-    private House house;
     @ManyToOne
     private Status status;
 }

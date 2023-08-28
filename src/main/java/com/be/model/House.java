@@ -1,6 +1,8 @@
 package com.be.model;
 import lombok.Data;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,9 +15,12 @@ public class House {
     private int numberOfBedrooms;
     private int numberOfLivingRooms;
     private int numberOfHire;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private double price;
-    private String imageMain;
     @ManyToOne
     private Status status;
+    @ManyToOne
+    private Category category;
+
 }

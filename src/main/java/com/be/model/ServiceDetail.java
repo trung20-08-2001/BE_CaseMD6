@@ -6,11 +6,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class HouseDetail {
+public class ServiceDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String image;
+    private int id;
     @ManyToOne
     private House house;
+    @ManyToOne
+    private Service service;
 }
