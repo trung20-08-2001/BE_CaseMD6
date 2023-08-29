@@ -24,4 +24,19 @@ public class AccountServiceImpl implements IAccountService {
         roles.add(account.getRole());
         return new User(account.getUsername(), account.getPassword(), roles);
     }
+
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public void edit(Account account) {
+        accountRepository.save(account);
+    }
+
+    @Override
+    public Account findByID(int id) {
+        return accountRepository.findById(id).get();
+    }
 }
