@@ -32,6 +32,20 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public Account getAccountByUsernameAndPassword(String username, String password) {
-        return accountRepository.getAccountByUsernameAndPassword(username,password);
+        return accountRepository.getAccountByUsernameAndPassword(username, password);
+    }
+
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public void edit(Account account) {
+        accountRepository.save(account);
+    }
+
+    @Override
+    public Account findByID(int id) {
+        return accountRepository.findById(id).get();
     }
 }
