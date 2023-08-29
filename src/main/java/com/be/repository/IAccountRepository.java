@@ -7,7 +7,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface  IAccountRepository extends JpaRepository<Account,Integer> {
+public interface IAccountRepository extends JpaRepository<Account, Integer> {
     @Query("select a from Account a where a.username=:u")
     Account getAccountByUsername(@Param("u") String username);
+
+
+    @Query("select a from Account a where a.username= :username and a.password= :password")
+    Account getAccountByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }
