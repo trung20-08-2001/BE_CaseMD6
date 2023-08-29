@@ -6,13 +6,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Image {
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(columnDefinition = "TEXT")
-    private String url;
-    private String type;
+    private String content;
     @ManyToOne
-    private House house;
+    private Account account;
 }

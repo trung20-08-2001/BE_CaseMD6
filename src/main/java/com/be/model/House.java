@@ -22,5 +22,7 @@ public class House {
     private Status status;
     @ManyToOne
     private Category category;
+    @ManyToOne
+    private Account account;
 
 }
