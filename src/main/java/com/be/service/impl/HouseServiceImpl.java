@@ -11,8 +11,8 @@ public class HouseServiceImpl implements IHouseService {
     @Autowired
     IHouseRepository houseRepository;
     @Override
-    public void save(House house) {
-        houseRepository.save(house);
+    public House save(House house) {
+      return   houseRepository.save(house);
     }
 
 }

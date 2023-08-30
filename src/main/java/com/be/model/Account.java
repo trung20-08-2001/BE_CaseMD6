@@ -18,6 +18,7 @@ public class Account {
     private String password;
     private String phone;
     private String address;
+    @Column(columnDefinition = "TEXT")
     private String avatar;
     @ManyToOne
     private Role role;
