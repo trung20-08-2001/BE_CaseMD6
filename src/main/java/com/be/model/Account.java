@@ -16,6 +16,7 @@ public class Account {
     private int id;
     private String username;
     private String password;
+    private String fullName;
     private String phone;
     private String address;
     @Column(columnDefinition = "TEXT")
