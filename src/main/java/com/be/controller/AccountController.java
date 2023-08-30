@@ -1,8 +1,13 @@
 package com.be.controller;
 
 import com.be.model.Account;
-import com.be.service.impl.AccountService;
+import com.be.model.House;
+
+import com.be.service.IAccountService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +17,8 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
     @Autowired
-    AccountService accountService;
+    IAccountService accountService;
+
     @GetMapping
     public List<Account> getAll() {
         return accountService.getAll();
@@ -24,7 +30,7 @@ public class AccountController {
     }
 
     @PostMapping("/editAccount")
-    public void edit(@RequestBody Account account){
+    public void edit(@RequestBody Account account) {
         accountService.edit(account);
     }
 
@@ -34,7 +40,19 @@ public class AccountController {
     }
 
     @GetMapping("/searchAccount/{id}")
-    public Account findById(@PathVariable int id){
+    public Account findById(@PathVariable int id) {
         return accountService.findById(id);
     }
+
+    @GetMapping("/searchHouse")
+    public ResponseEntity<List<House>> searchHouses(@RequestParam int idAccount, @RequestParam String name, @RequestParam String nameStatus) {
+        List<House> houses = accountService.findByNameAndStatus(idAccount, "%" + name + "%", nameStatus);
+        return ResponseEntity.ok(houses);
+    }
+
+    @PostMapping("/register")
+    public Account register(@RequestBody Account account) {
+       return accountService.getAccountByUsernameAndPhone(account.getUsername(), account.getPhone());
+    }
+
 }

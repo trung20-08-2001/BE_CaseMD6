@@ -1,7 +1,5 @@
 package com.be.model;
-
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,4 +17,5 @@ public class Account {
     private Role role;
     @ManyToOne
     private Status status;
+
 }

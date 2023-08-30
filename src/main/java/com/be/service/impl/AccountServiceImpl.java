@@ -1,6 +1,7 @@
 package com.be.service.impl;
 
 import com.be.model.Account;
+import com.be.model.House;
 import com.be.repository.IAccountRepository;
 import com.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -24,4 +26,44 @@ public class AccountServiceImpl implements IAccountService {
         roles.add(account.getRole());
         return new User(account.getUsername(), account.getPassword(), roles);
     }
+
+    @Override
+    public Account getAccountByUsernameAndPhone(String username, String phone) {
+        Optional<Account> accountOptional= accountRepository.getAccountByUsernameAndPhone(username,phone);
+        return accountOptional.orElse(null);
+    }
+
+    @Autowired
+    IAccountRepository iAccountRepository;
+
+    @Override
+    public List<Account> getAll() {
+        return (List<Account>) iAccountRepository.findAll();
+    }
+
+    @Override
+    public void save(Account account) {
+        iAccountRepository.save(account);
+    }
+
+    @Override
+    public void edit(Account account) {
+        iAccountRepository.save(account);
+    }
+
+    @Override
+    public void delete(int id) {
+        iAccountRepository.deleteById(id);
+    }
+
+    @Override
+    public Account findById(int id) {
+        return iAccountRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<House> findByNameAndStatus(int idAccount, String name, String nameStatus) {
+        return accountRepository.findByNameAndStatus(idAccount, name, nameStatus);
+    }
+
 }
