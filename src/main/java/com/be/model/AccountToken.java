@@ -11,5 +11,8 @@ public class AccountToken {
     private int id;
     private String username;
     private Role role;
+    private String phone;
+    private String address;
+    private String avatar;
     private String token;
 }
