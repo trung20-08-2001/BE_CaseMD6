@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import lombok.Data;
 import javax.persistence.*;
 
 @Entity
@@ -25,4 +26,5 @@ public class Account {
     private Role role;
     @ManyToOne
     private Status status;
+
 }
