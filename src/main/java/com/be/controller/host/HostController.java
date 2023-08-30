@@ -30,9 +30,6 @@ public class HostController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-
-
-
     @PostMapping("/register")
     public ResponseEntity<Account> createHostAcc(@RequestBody Account account){
         Role role = iRoleRepository.findByName("ROLE_HOST");
@@ -40,5 +37,7 @@ public class HostController {
         iAccountService.saveAccount(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
+
+
 
 }

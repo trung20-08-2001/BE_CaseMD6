@@ -1,4 +1,4 @@
-package com.be.controller;
+package com.be.controller.host;
 
 import com.be.model.Image;
 import com.be.service.IImageService;
@@ -17,7 +17,7 @@ public class ImageController {
     @Autowired
     IImageService iImageService;
     @PostMapping("/save")
-    public void save(@RequestBody Image image){
-         iImageService.save(image);
+    public void save(@RequestBody List<Image> images){
+         iImageService.save(images);
     }
 }

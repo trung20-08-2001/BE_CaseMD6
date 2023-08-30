@@ -1,4 +1,4 @@
-package com.be.controller;
+package com.be.controller.host;
 
 import com.be.model.Category;
 import com.be.service.ICategoryService;
