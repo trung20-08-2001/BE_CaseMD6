@@ -13,7 +13,7 @@ public class HouseController {
     private IHouseService houseService;
 
     @PostMapping("/save")
-    public void save(@RequestBody House house) {
-        houseService.save(house);
+    public House save(@RequestBody House house) {
+      return  houseService.save(house);
     }
 }

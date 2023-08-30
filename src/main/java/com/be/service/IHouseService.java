@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface IHouseService {
-    void save(House house);
+    House save(House house);
 
 
 }
