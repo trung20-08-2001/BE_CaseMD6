@@ -29,7 +29,7 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         account = iAccountService.getAccountByUsernameAndPassword(account.getUsername(), account.getPassword());
         String token = jwtService.createToken(authentication);
-        AccountToken accountToken = new AccountToken(account.getId(),account.getUsername(),account.getRole(),token);
+        AccountToken accountToken = new AccountToken(account.getId(),account.getUsername(),account.getRole(),account.getAddress(),account.getPhone(),account.getAvatar(),token);
         return accountToken;
     }
 }
