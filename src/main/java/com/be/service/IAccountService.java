@@ -6,12 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface IAccountService extends UserDetailsService {
-<<<<<<< HEAD
     Account saveAccount(Account account);
     Account getAccountByUsernameAndPassword(String username, String password);
-=======
     List<Account> findAll();
     void edit(Account account);
     Account findByID(int id);
->>>>>>> editprofile
 }
