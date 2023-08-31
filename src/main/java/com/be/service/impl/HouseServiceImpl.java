@@ -6,13 +6,20 @@ import com.be.service.IHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HouseServiceImpl implements IHouseService {
     @Autowired
-    IHouseRepository houseRepository;
+    IHouseRepository iHouseRepository;
     @Override
-    public void save(House house) {
-        houseRepository.save(house);
+    public House save(House house) {
+      return   iHouseRepository.save(house);
+    }
+
+    @Override
+    public List<House> findHouseByAccount(int idAccount) {
+        return iHouseRepository.findHouseByAccount(idAccount);
     }
 
 }

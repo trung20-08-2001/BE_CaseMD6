@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import lombok.Data;
 import javax.persistence.*;
 
 @Entity
@@ -19,9 +20,11 @@ public class Account {
     private String fullName;
     private String phone;
     private String address;
+    @Column(columnDefinition = "TEXT")
     private String avatar;
     @ManyToOne
     private Role role;
     @ManyToOne
     private Status status;
+
 }

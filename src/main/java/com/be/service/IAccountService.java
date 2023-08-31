@@ -1,14 +1,23 @@
 package com.be.service;
 
 import com.be.model.Account;
+import com.be.model.House;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
 public interface IAccountService extends UserDetailsService {
+
     Account saveAccount(Account account);
     Account getAccountByUsernameAndPassword(String username, String password);
+
     List<Account> findAll();
     void edit(Account account);
     Account findByID(int id);
+
+    Account findById(int id);
+
+    void delete(int id);
+    List<House> findByNameAndStatus(int idAccount, String name, String nameStatus);
+    Account getAccountByUsernameAndPhone(String username,String phone);
 }

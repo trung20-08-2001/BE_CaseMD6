@@ -14,4 +14,7 @@ public interface IHouseRepository extends JpaRepository<House,Integer> {
 
     @Query("SELECT COUNT(h) FROM House h WHERE h.account = :account")
     int countHousesByAccount(Account account);
+
+    @Query(value = "select h from House h where h.account.id=:idAccount")
+    List<House> findHouseByAccount(@Param("idAccount") int idAccount);
 }
