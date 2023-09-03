@@ -22,4 +22,9 @@ public class ImageController {
     public void updateImageHouse(@PathVariable int idHouse,@RequestBody List<Image> images){
         iImageService.updateImageHouse(idHouse,images);
     }
+
+    @GetMapping("/findImageBanner")
+    public List<Image> findImageBanner(){
+        return iImageService.findImageBanner();
+    }
 }

@@ -18,4 +18,7 @@ public interface IImageRepository extends JpaRepository<Image,Integer> {
     @Modifying
     @Query("DELETE FROM Image i WHERE i.house.id=:idHouse ")
     void deleteAllInBatch(@Param("idHouse") Integer idHouse);
+
+    @Query(value = "select i from Image i where i.type='BANNER'")
+    List<Image> findImageBanner();
 }
