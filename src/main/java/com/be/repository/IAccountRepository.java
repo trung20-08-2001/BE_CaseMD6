@@ -22,4 +22,6 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     @Query("select a from Account a where a.username=:u or a.phone=:p")
     Optional<Account> getAccountByUsernameAndPhone(@Param("u") String username, @Param("p")String phone );
 
+    @Query(value = "select a from Account a where a.role.id=3 order by a.id desc")
+    List<Account> findAccountUser();
 }

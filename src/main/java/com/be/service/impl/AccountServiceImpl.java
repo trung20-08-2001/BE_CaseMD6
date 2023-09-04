@@ -1,8 +1,11 @@
 package com.be.service.impl;
 
 import com.be.model.Account;
+import com.be.model.Bill;
 import com.be.model.House;
+import com.be.model.dto.AccountUserDTO;
 import com.be.repository.IAccountRepository;
+import com.be.repository.IBillRepository;
 import com.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +22,8 @@ import java.util.Optional;
 public class AccountServiceImpl implements IAccountService {
     @Autowired
     IAccountRepository iAccountRepository;
+    @Autowired
+    IBillRepository iBillRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = iAccountRepository.getAccountByUsername(username);
@@ -43,6 +48,20 @@ public class AccountServiceImpl implements IAccountService {
     public Account getAccountByUsernameAndPhone(String username, String phone) {
         Optional<Account> accountOptional= iAccountRepository.getAccountByUsernameAndPhone(username,phone);
         return accountOptional.orElse(null);
+    }
+
+    @Override
+    public List<AccountUserDTO> findAccountUsers() {
+        List<Account> accountUsers= iAccountRepository.findAccountUser();
+        List<AccountUserDTO> accountUserDTOS=new ArrayList<>();
+        for(Account account:accountUsers){
+            List<Bill> bills=iBillRepository.findBillByAccountId(account.getId());
+            Optional<Double> totalAllBillOptional=iBillRepository.getTotalPriceByAccountId(account.getId());
+            double totalAllBill=totalAllBillOptional.orElse(0.0);
+            AccountUserDTO accountUserDTO=new AccountUserDTO(account.getId(), account.getUsername(), account.getFullName(), account.getPhone(), account.getStatus(),totalAllBill,bills);
+            accountUserDTOS.add(accountUserDTO);
+        }
+        return accountUserDTOS;
     }
 
 
