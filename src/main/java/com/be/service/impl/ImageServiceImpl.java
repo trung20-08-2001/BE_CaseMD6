@@ -11,9 +11,26 @@ import java.util.List;
 @Service
 public class ImageServiceImpl implements IImageService {
     @Autowired
-    IImageRepository imageRepository;
+    IImageRepository iImageRepository;
     @Override
-    public void save(Image image) {
-        imageRepository.save(image);
+    public List<Image> save(List<Image> images) {
+
+        return iImageRepository.saveAll(images);
+    }
+
+    @Override
+    public List<Image> findImageByHouse(int idHouse) {
+        return iImageRepository.findImageByIdHouse(idHouse);
+    }
+
+    @Override
+    public void updateImageHouse(int idHouse,List<Image> images) {
+        iImageRepository.deleteAllInBatch(idHouse);
+        iImageRepository.saveAll(images);
+    }
+
+    @Override
+    public List<Image> findImageBanner() {
+        return iImageRepository.findImageBanner();
     }
 }

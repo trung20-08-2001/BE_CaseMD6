@@ -15,4 +15,5 @@ public class Image {
     private String type;
     @ManyToOne
     private House house;
+
 }
