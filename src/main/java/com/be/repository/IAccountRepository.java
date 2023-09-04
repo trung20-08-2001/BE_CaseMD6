@@ -24,4 +24,6 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
 
     @Query(value = "select a from Account a where a.role.id=3 order by a.id desc")
     List<Account> findAccountUser();
+    @Query("select a from Account  a where a.status.id= :status_id")
+    List<Account> findAllByStatus(@Param("status_id")int status_id);
 }

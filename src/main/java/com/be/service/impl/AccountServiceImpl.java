@@ -64,6 +64,11 @@ public class AccountServiceImpl implements IAccountService {
         return accountUserDTOS;
     }
 
+    @Override
+    public List<Account> findAllByStatus(int status_id) {
+        return iAccountRepository.findAllByStatus(status_id);
+    }
+
 
     @Override
     public void edit(Account account) {
