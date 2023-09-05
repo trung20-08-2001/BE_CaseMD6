@@ -1,5 +1,6 @@
 package com.be.repository;
 
+import com.be.model.Account;
 import com.be.model.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,7 @@ public interface IBillRepository extends JpaRepository<Bill,Integer> {
 
     @Query(value = "select sum(b.totalPrice) from Bill b where b.account.id=:idAccount")
     Optional<Double> getTotalPriceByAccountId(@Param("idAccount") int idAccount);
+
+    @Query("SELECT SUM(b.totalPrice) FROM Bill b WHERE b.account = :account")
+    Double getTotalPriceByAccount(@Param("account") Account account);
 }

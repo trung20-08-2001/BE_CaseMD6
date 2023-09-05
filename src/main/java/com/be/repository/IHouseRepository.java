@@ -1,5 +1,6 @@
 package com.be.repository;
 
+import com.be.model.Account;
 import com.be.model.House;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +14,8 @@ public interface IHouseRepository extends JpaRepository<House,Integer> {
 
     @Query(value = "select h from House h where h.account.id=:idAccount order by h.id desc")
     List<House> findHouseByAccount(@Param("idAccount") int idAccount);
+
+    @Query("SELECT COUNT(h) FROM House h WHERE h.account = :account")
+    int countHousesByAccount(Account account);
+
 }
