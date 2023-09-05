@@ -33,8 +33,8 @@ public class ViewVendorController {
     }
 
     @GetMapping("/vendor/{id}")
-    public Account findById(@PathVariable int id) {
-        return iViewVendor.findByID(id);
+    public ViewVendor findVendorByID(@PathVariable int id) {
+        return iViewVendor.findVendorByID(id);
     }
 
 }

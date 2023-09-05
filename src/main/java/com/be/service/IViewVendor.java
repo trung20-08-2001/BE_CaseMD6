@@ -10,6 +10,6 @@ import java.util.List;
 public interface IViewVendor {
     void save(Account account);
     Account findByID(int id);
-    List<Account> findVendorsByRoleName();
+    ViewVendor findVendorByID(int id);
     List<ViewVendor> findAllVendors();
 }

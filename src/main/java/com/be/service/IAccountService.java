@@ -13,7 +13,6 @@ public interface IAccountService extends UserDetailsService {
 
     List<Account> findAll();
     void edit(Account account);
-    Account findByID(int id);
 
     Account findById(int id);
 

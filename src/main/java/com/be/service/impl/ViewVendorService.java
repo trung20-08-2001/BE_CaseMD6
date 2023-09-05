@@ -36,8 +36,8 @@ public class ViewVendorService implements IViewVendor {
     }
 
     @Override
-    public List<Account> findVendorsByRoleName() {
-        return iAccountRepository.findAccountsByRoleName_Vendor();
+    public Account findByID(int id) {
+        return iAccountRepository.findById(id).get();
     }
 
     @Override
@@ -45,20 +45,30 @@ public class ViewVendorService implements IViewVendor {
         List<Status> statuses = iStatusRepository.findAll();
         List<ViewVendor> viewVendors = new ArrayList<>();
         ViewVendor viewVendor;
-        for (Account account : findVendorsByRoleName()) {
-            Double totalPrice = getTotalPriceByAccount(account);
-            double resultPrice = (totalPrice != null) ? totalPrice : 0;
-            Integer countHouses = countHousesByAccount(account);
-            int resultCount = (countHouses != null) ? countHouses : 0;
-            viewVendor = new ViewVendor(0, resultPrice, resultCount, account, statuses);
-            viewVendors.add(viewVendor);
+        for (Account account : iAccountRepository.findAll()) {
+            if (((account.getStatus().getId() == 2) && (account.getRole().getId() == 3)) || account.getRole().getId() == 2) {
+                Double totalPrice = getTotalPriceByAccount(account);
+                double resultPrice = (totalPrice != null) ? totalPrice : 0;
+                Integer countHouses = countHousesByAccount(account);
+                int resultCount = (countHouses != null) ? countHouses : 0;
+                viewVendor = new ViewVendor(0, resultPrice, resultCount, account, statuses);
+                viewVendors.add(viewVendor);
+            }
         }
         return viewVendors;
     }
 
     @Override
-    public Account findByID(int id) {
-        return iAccountRepository.findById(id).get();
+    public ViewVendor findVendorByID(int id) {
+        for (ViewVendor viewVendor : findAllVendors()) {
+            if (viewVendor.getAccount().getId() == id) {
+                if (viewVendor.getAccount().getAvatar() == null) {
+                    viewVendor.getAccount().setAvatar("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png");
+                }
+                return viewVendor;
+            }
+        }
+        return null;
     }
 
 
