@@ -42,14 +42,20 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         account = iAccountService.getAccountByUsernameAndPassword(account.getUsername(), account.getPassword());
-
-        if (account.getStatus().getId() == 3) {
-            ErrorResponse errorResponse = new ErrorResponse("Tài khoản đã bị khóa");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+        System.out.println(account);
+        if (account != null) {
+            if (account.getStatus().getId() == 3) {
+                ErrorResponse errorResponse = new ErrorResponse("Tài khoản đã bị khóa");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+            } else {
+                String token = jwtService.createToken(authentication);
+                AccountToken accountToken = new AccountToken(account.getId(), account.getUsername(), account.getRole(), account.getAddress(), account.getPhone(), account.getAvatar(), account.getStatus(), token);
+                return ResponseEntity.ok(accountToken);
+            }
         } else {
-            String token = jwtService.createToken(authentication);
-            AccountToken accountToken = new AccountToken(account.getId(), account.getUsername(), account.getRole(), account.getAddress(), account.getPhone(), account.getAvatar(), account.getStatus(), token);
-            return ResponseEntity.ok(accountToken);
+            return null;
         }
+
+
     }
 }

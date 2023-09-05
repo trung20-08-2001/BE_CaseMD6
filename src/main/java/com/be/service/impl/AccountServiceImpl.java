@@ -1,8 +1,11 @@
 package com.be.service.impl;
 
 import com.be.model.Account;
+import com.be.model.Bill;
 import com.be.model.House;
+import com.be.model.dto.AccountUserDTO;
 import com.be.repository.IAccountRepository;
+import com.be.repository.IBillRepository;
 import com.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +22,8 @@ import java.util.Optional;
 public class AccountServiceImpl implements IAccountService {
     @Autowired
     IAccountRepository iAccountRepository;
+    @Autowired
+    IBillRepository iBillRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = iAccountRepository.getAccountByUsername(username);
@@ -34,9 +39,8 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public Account getAccountByUsernameAndPassword(String username, String password) {
-        return iAccountRepository.getAccountByUsernameAndPassword(username, password);
+        return  iAccountRepository.getAccountByUsernameAndPassword(username, password).orElse(null);
     }
-
     public List<Account> findAll() {
         return iAccountRepository.findAll();
     }
@@ -46,8 +50,27 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    public List<AccountUserDTO> findAccountUsers() {
+        List<Account> accountUsers= iAccountRepository.findAccountUser();
+        List<AccountUserDTO> accountUserDTOS=new ArrayList<>();
+        for(Account account:accountUsers){
+            List<Bill> bills=iBillRepository.findBillByAccountId(account.getId());
+            Optional<Double> totalAllBillOptional=iBillRepository.getTotalPriceByAccountId(account.getId());
+            double totalAllBill=totalAllBillOptional.orElse(0.0);
+            AccountUserDTO accountUserDTO=new AccountUserDTO(account.getId(), account.getAvatar(),account.getUsername(), account.getFullName(), account.getPhone(), account.getStatus(),totalAllBill,bills);
+            accountUserDTOS.add(accountUserDTO);
+        }
+        return accountUserDTOS;
+    }
+
+    @Override
     public List<Account> findAllByStatus(int status_id) {
         return iAccountRepository.findAllByStatus(status_id);
+    }
+
+    @Override
+    public void updateStatus(int status_id, int idAccount) {
+        iAccountRepository.updateStatus(status_id, idAccount);
     }
 
     @Override

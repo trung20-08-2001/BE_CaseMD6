@@ -1,24 +1,28 @@
 package com.be.controller.admin;
 
+import com.be.model.dto.AccountUserDTO;
+import com.be.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.be.model.Account;
 import com.be.model.Role;
 import com.be.model.Status;
 import com.be.repository.IRoleRepository;
 import com.be.repository.IStatusRepository;
-import com.be.service.IAccountService;
 import com.be.service.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @CrossOrigin("*")
-@RequestMapping("/admin/")
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     IAccountService iAccountService;
@@ -30,6 +34,15 @@ public class AdminController {
     AuthenticationManager authenticationManager;
     @Autowired
     IStatusRepository iStatusRepository;
+    @GetMapping("/findAccountUsers")
+    public List<AccountUserDTO> findAccountUsers(){
+        return iAccountService.findAccountUsers();
+    }
+
+    @GetMapping("/updateStatus/{status_id}/{idAccount}")
+    public  void updateStatus(@PathVariable int status_id, @PathVariable int idAccount){
+        iAccountService.updateStatus(status_id, idAccount);
+    }
 
     @PostMapping("registration/req/{accountId}")
     public ResponseEntity<Account> registerAsHost(@PathVariable int accountId,
@@ -104,5 +117,4 @@ public class AdminController {
         }
 
     }
-
 }
