@@ -39,6 +39,10 @@ public class AdminController {
         return iAccountService.findAccountUsers();
     }
 
+    @GetMapping("/updateStatus/{status_id}/{idAccount}")
+    public  void updateStatus(@PathVariable int status_id, @PathVariable int idAccount){
+        iAccountService.updateStatus(status_id, idAccount);
+    }
 
     @PostMapping("registration/req/{accountId}")
     public ResponseEntity<Account> registerAsHost(@PathVariable int accountId,

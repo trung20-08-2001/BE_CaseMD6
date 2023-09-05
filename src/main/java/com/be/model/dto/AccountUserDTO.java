@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountUserDTO {
     private int id;
+    private String avatar;
     private String username;
     private String fullName;
     private String phone;

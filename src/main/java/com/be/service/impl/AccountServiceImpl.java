@@ -58,7 +58,7 @@ public class AccountServiceImpl implements IAccountService {
             List<Bill> bills=iBillRepository.findBillByAccountId(account.getId());
             Optional<Double> totalAllBillOptional=iBillRepository.getTotalPriceByAccountId(account.getId());
             double totalAllBill=totalAllBillOptional.orElse(0.0);
-            AccountUserDTO accountUserDTO=new AccountUserDTO(account.getId(), account.getUsername(), account.getFullName(), account.getPhone(), account.getStatus(),totalAllBill,bills);
+            AccountUserDTO accountUserDTO=new AccountUserDTO(account.getId(), account.getAvatar(),account.getUsername(), account.getFullName(), account.getPhone(), account.getStatus(),totalAllBill,bills);
             accountUserDTOS.add(accountUserDTO);
         }
         return accountUserDTOS;
@@ -67,6 +67,11 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public List<Account> findAllByStatus(int status_id) {
         return iAccountRepository.findAllByStatus(status_id);
+    }
+
+    @Override
+    public void updateStatus(int status_id, int idAccount) {
+        iAccountRepository.updateStatus(status_id, idAccount);
     }
 
 

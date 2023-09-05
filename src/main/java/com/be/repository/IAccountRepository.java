@@ -2,9 +2,13 @@ package com.be.repository;
 
 import com.be.model.Account;
 import com.be.model.House;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import javax.transaction.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +30,9 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     List<Account> findAccountUser();
     @Query("select a from Account  a where a.status.id= :status_id")
     List<Account> findAllByStatus(@Param("status_id")int status_id);
+
+@Transactional
+    @Modifying
+    @Query(value = "update Account set status_id = :status_id where id = :idAccount", nativeQuery = true)
+    void updateStatus( @Param("status_id") int status_id,@Param("idAccount") int idAccount);
 }
