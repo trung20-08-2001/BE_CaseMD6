@@ -13,6 +13,7 @@ public class Bill {
     private int id;
     private Date dateCheckin;
     private Date dateCheckout;
+    @Column(columnDefinition = "0")
     private double totalPrice;
     @ManyToOne
     private Account account;
