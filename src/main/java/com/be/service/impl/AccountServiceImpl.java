@@ -50,6 +50,11 @@ public class AccountServiceImpl implements IAccountService {
         return iAccountRepository.findAllByStatus(status_id);
     }
 
+    @Override
+    public List<Account> findAllByRole(int role_id) {
+        return iAccountRepository.findAccountByRole(role_id);
+    }
+
 
     @Override
     public void edit(Account account) {

@@ -19,4 +19,5 @@ public interface IAccountService extends UserDetailsService {
     List<House> findByNameAndStatus(int idAccount, String name, String nameStatus);
     Account getAccountByUsernameAndPhone(String username,String phone);
     List<Account> findAllByStatus(int status_id);
+    List<Account> findAllByRole(int role_id);
 }
