@@ -12,9 +12,10 @@ public interface IHouseRepository extends JpaRepository<House,Integer> {
     @Query(value = "select h from House h where h.name like '%'+:name+'%'")
     List<House> findHouseByName(@Param("name") String name);
 
+    @Query(value = "select h from House h where h.account.id=:idAccount order by h.id desc")
+    List<House> findHouseByAccount(@Param("idAccount") int idAccount);
+
     @Query("SELECT COUNT(h) FROM House h WHERE h.account = :account")
     int countHousesByAccount(Account account);
 
-    @Query(value = "select h from House h where h.account.id=:idAccount")
-    List<House> findHouseByAccount(@Param("idAccount") int idAccount);
 }

@@ -2,9 +2,14 @@ package com.be.repository;
 
 import com.be.model.Account;
 import com.be.model.House;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import javax.transaction.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +19,7 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     Account getAccountByUsername(@Param("u") String username);
 
     @Query("select a from Account a where a.username= :username and a.password= :password")
-    Account getAccountByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    Optional<Account> getAccountByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     @Query("SELECT a FROM Account a JOIN a.role r WHERE r.name = 'ROLE_HOST'")
     List<Account> findAccountsByRoleName_Vendor();
@@ -24,6 +29,19 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
 
 
     @Query("select a from Account a where a.username=:u or a.phone=:p")
-    Optional<Account> getAccountByUsernameAndPhone(@Param("u") String username, @Param("p")String phone );
+    Optional<Account> getAccountByUsernameAndPhone(@Param("u") String username, @Param("p") String phone);
 
+    @Query(value = "select a from Account a where a.role.id=3 order by a.id desc")
+    List<Account> findAccountUser();
+
+    @Query("select a from Account  a where a.status.id= :status_id")
+    List<Account> findAllByStatus(@Param("status_id") int status_id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update Account set status_id = :status_id where id = :idAccount", nativeQuery = true)
+    void updateStatus(@Param("status_id") int status_id, @Param("idAccount") int idAccount);
+
+    @Query("select a from Account a where a.role.id= :role_id")
+    List<Account> findAccountByRole(@Param("role_id") int role_id);
 }

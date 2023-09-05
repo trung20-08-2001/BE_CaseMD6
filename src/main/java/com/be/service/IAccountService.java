@@ -2,6 +2,7 @@ package com.be.service;
 
 import com.be.model.Account;
 import com.be.model.House;
+import com.be.model.dto.AccountUserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface IAccountService extends UserDetailsService {
     void delete(int id);
     List<House> findByNameAndStatus(int idAccount, String name, String nameStatus);
     Account getAccountByUsernameAndPhone(String username,String phone);
+    List<AccountUserDTO> findAccountUsers();
+    List<Account> findAllByStatus(int status_id);
+    void  updateStatus(int status_id,int idAccount);
+    List<Account> findAllByRole(int role_id);
 }
