@@ -3,6 +3,7 @@ package com.be.controller.host;
 import com.be.model.House;
 import com.be.model.Image;
 import com.be.model.dto.HouseDTO;
+import com.be.service.IHouseDTOService;
 import com.be.service.IHouseService;
 import com.be.service.IImageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +19,21 @@ public class HouseController {
     @Autowired
     private IHouseService iHouseService;
     @Autowired
-    private IImageService iImageService;
+    private IHouseDTOService iHouseDTOService;
 
     @PostMapping("/save")
     public House save(@RequestBody House house) {
-      return  iHouseService.save(house);
+        return iHouseService.save(house);
     }
 
     @GetMapping("/findHouseByAccount/{idAccount}")
-    public List<HouseDTO> findHouseByAccount(@PathVariable int idAccount){
-        List<HouseDTO> result = new ArrayList();
-        List<House> houses= iHouseService.findHouseByAccount(idAccount);
-        for(int i=0; i<houses.size(); i++){
-            List<Image> images=iImageService.findImageByHouse(houses.get(i).getId());
-            result.add(new HouseDTO(houses.get(i), images));
-        }
-        return result;
+    public List<HouseDTO> findHouseByAccount(@PathVariable int idAccount) {
+        return iHouseDTOService.findHouseDTOByAccount(idAccount);
+    }
+
+    @GetMapping("/findTopHouse")
+    public List<HouseDTO> findTopHouse() {
+        return iHouseDTOService.findTopHouseDTO();
     }
 
 }

@@ -10,4 +10,5 @@ public interface IHouseService {
     House save(House house);
     List<House> findHouseByAccount(int idAccount);
 
+
 }

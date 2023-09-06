@@ -22,4 +22,6 @@ public class HouseServiceImpl implements IHouseService {
         return iHouseRepository.findHouseByAccount(idAccount);
     }
 
+
+
 }
