@@ -28,4 +28,6 @@ public class HouseServiceImpl implements IHouseService {
         return iHouseRepository.findById(id).orElse(null);
     }
 
+
+
 }

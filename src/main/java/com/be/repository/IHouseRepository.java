@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-
 public interface IHouseRepository extends JpaRepository<House,Integer> {
+
     @Query(value = "select h from House h where h.name like '%'+:name+'%'")
     List<House> findHouseByName(@Param("name") String name);
 
@@ -17,5 +17,8 @@ public interface IHouseRepository extends JpaRepository<House,Integer> {
 
     @Query("SELECT COUNT(h) FROM House h WHERE h.account = :account")
     int countHousesByAccount(Account account);
+
+//    @Query(value = "select h from House h order by h.id desc limit 6")
+//    List<House> findTopHouse();
 
 }

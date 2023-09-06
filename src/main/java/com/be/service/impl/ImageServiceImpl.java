@@ -14,7 +14,6 @@ public class ImageServiceImpl implements IImageService {
     IImageRepository iImageRepository;
     @Override
     public List<Image> save(List<Image> images) {
-
         return iImageRepository.saveAll(images);
     }
 
