@@ -20,4 +20,6 @@ public interface IImageRepository extends JpaRepository<Image,Integer> {
 
     @Query(value = "select i from Image i where i.type='BANNER'")
     List<Image> findImageBanner();
+
+    List<Image> findByHouseId(int houseId);
 }
