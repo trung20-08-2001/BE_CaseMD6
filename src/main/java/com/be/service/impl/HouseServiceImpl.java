@@ -22,4 +22,9 @@ public class HouseServiceImpl implements IHouseService {
         return iHouseRepository.findHouseByAccount(idAccount);
     }
 
+    @Override
+    public House findById(int id) {
+        return iHouseRepository.findById(id).orElse(null);
+    }
+
 }

@@ -36,4 +36,9 @@ public class HouseController {
         return result;
     }
 
+    @GetMapping("/searchhouse/{id}")
+    public House findById(@PathVariable int id){
+        return iHouseService.findById(id);
+    }
+
 }
