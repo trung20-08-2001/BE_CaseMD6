@@ -14,6 +14,7 @@ public interface IAccountService extends UserDetailsService {
 
     List<Account> findAll();
     void edit(Account account);
+
     Account findById(int id);
 
     void delete(int id);
@@ -22,4 +23,5 @@ public interface IAccountService extends UserDetailsService {
     List<AccountUserDTO> findAccountUsers();
     List<Account> findAllByStatus(int status_id);
     void  updateStatus(int status_id,int idAccount);
+    List<Account> findAllByRole(int role_id);
 }

@@ -14,5 +14,6 @@ public class AccountToken {
     private String phone;
     private String address;
     private String avatar;
+    private Status status;
     private String token;
 }

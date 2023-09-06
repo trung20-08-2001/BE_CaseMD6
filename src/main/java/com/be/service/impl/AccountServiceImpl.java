@@ -39,9 +39,8 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public Account getAccountByUsernameAndPassword(String username, String password) {
-        return iAccountRepository.getAccountByUsernameAndPassword(username, password);
+        return  iAccountRepository.getAccountByUsernameAndPassword(username, password).orElse(null);
     }
-
     public List<Account> findAll() {
         return iAccountRepository.findAll();
     }
@@ -74,11 +73,17 @@ public class AccountServiceImpl implements IAccountService {
         iAccountRepository.updateStatus(status_id, idAccount);
     }
 
+    @Override
+    public List<Account> findAllByRole(int role_id) {
+        return iAccountRepository.findAccountByRole(role_id);
+    }
+
 
     @Override
     public void edit(Account account) {
         iAccountRepository.save(account);
     }
+
 
     @Override
     public Account findById(int id) {

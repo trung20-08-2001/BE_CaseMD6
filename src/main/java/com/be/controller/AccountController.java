@@ -44,10 +44,9 @@ public class AccountController {
         return iAccountService.findById(id);
     }
 
-    @PostMapping("/edit/{id}")
-    public void editAccount(Account account, @PathVariable int id) {
-        account.setId(id);
-        iAccountService.edit(account);
+    @PostMapping("/edit")
+    public void editAccount(@RequestBody Account account) {
+        iAccountService.saveAccount(account);
     }
 
     @GetMapping("/searchHouse")

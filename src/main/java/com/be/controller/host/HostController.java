@@ -16,6 +16,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.Authenticator;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -32,13 +33,20 @@ public class HostController {
     IStatusRepository iStatusRepository;
 
     @PostMapping("/register")
-    public ResponseEntity<Account> createHostAcc(@RequestBody Account account){
+    public ResponseEntity<Account> createHostAcc(@RequestBody Account account) {
         Role role = iRoleRepository.findByName("ROLE_HOST");
         account.setRole(role);
         iAccountService.saveAccount(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
-
-
+    @GetMapping("/listhost/{accountId}")
+    public List<Account> getAllAccountByRole(@PathVariable int accountId) {
+        Account account = iAccountService.findById(accountId);
+        if (account.getRole().getId() == 1) {
+            return iAccountService.findAllByRole(2);
+        } else {
+            return null;
+        }
+    }
 }
