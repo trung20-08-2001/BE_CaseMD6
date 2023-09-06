@@ -8,4 +8,6 @@ public interface IHouseDTOService {
     List<HouseDTO> findHouseDTOByAccount(int idAccount);
 
     List<HouseDTO> findTopHouseDTO();
+
+    List<HouseDTO> findAllHouseDTO();
 }

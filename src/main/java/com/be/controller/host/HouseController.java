@@ -36,4 +36,9 @@ public class HouseController {
         return iHouseDTOService.findTopHouseDTO();
     }
 
+    @GetMapping("/findAllHouse")
+    public List<HouseDTO> findAllHouse() {
+        return iHouseDTOService.findAllHouseDTO();
+    }
+
 }

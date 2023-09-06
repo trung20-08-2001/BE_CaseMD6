@@ -46,4 +46,10 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
         List<House> houses = entityManager.createQuery("select h from House h order by h.numberOfHire desc ",House.class).setMaxResults(6).getResultList();
         return findHouseDTOs(houses);
     }
+
+    @Override
+    public List<HouseDTO> findAllHouseDTO() {
+        List<House> houses=iHouseRepository.findAll();
+        return findHouseDTOs(houses);
+    }
 }
