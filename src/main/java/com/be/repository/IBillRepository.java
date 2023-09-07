@@ -24,4 +24,5 @@ public interface IBillRepository extends JpaRepository<Bill,Integer> {
 
    @Query(value = "select sum(b.totalPrice) from Bill b where month(b.dateCheckout)=:month and year(b.dateCheckout)=:year and b.vendor.id=:idHost")
     Optional<Double> calculateTotalRevenueByTime(@Param("month") int month, @Param("year") int year,@Param("idHost") int idHost);
+
 }
