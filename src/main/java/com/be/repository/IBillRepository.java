@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IBillRepository extends JpaRepository<Bill,Integer> {
-    @Query(value = "select b from Bill b where b.account.id=:idAccount")
+    @Query(value = "select b from Bill b where b.user.id=:idAccount")
     List<Bill> findBillByAccountId(@Param("idAccount") Integer idAccount);
 
-    @Query(value = "select sum(b.totalPrice) from Bill b where b.account.id=:idAccount")
+    @Query(value = "select sum(b.totalPrice) from Bill b where b.user.id=:idAccount")
     Optional<Double> getTotalPriceByAccountId(@Param("idAccount") int idAccount);
 
-    @Query("SELECT SUM(b.totalPrice) FROM Bill b WHERE b.account = :account")
-    Double getTotalPriceByAccount(@Param("account") Account account);
+    @Query("SELECT SUM(b.totalPrice) FROM Bill b WHERE b.vendor = :vendor")
+    Double getTotalPriceByAccount(@Param("vendor") Account vendor);
 }

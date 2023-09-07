@@ -1,4 +1,4 @@
-package com.be.controller;
+package com.be.controller.admin;
 
 import com.be.model.Account;
 import com.be.model.Status;

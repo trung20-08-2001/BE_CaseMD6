@@ -16,7 +16,9 @@ public class Bill {
     @Column(columnDefinition = "0")
     private double totalPrice;
     @ManyToOne
-    private Account account;
+    private Account user;
+    @ManyToOne
+    private Account vendor;
     @ManyToOne
     private Status status;
 }
