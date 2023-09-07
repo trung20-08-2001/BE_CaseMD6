@@ -38,23 +38,10 @@ public class HouseController {
         return iHouseDTOService.findTopHouseDTO();
     }
 
-    @GetMapping("/searchhouse/{id}")
-    public House findById(@PathVariable int id){
-        return iHouseService.findById(id);
+    @GetMapping("/searchhouse/{idHouse}")
+    public HouseDTO findById(@PathVariable int idHouse){
+        return iHouseDTOService.findHouseDTOByHouse(idHouse);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<HouseDTO> getHouseWithImages(@PathVariable int id) {
-        Optional<House> houseOptional = Optional.ofNullable(iHouseService.findById(id));
-        if (!houseOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        House house = houseOptional.get();
-        List<Image> images = iImageService.findImageByHouse(id);
-        HouseDTO houseDTO = new HouseDTO(house,images);
-        houseDTO.setHouse(house);
-        houseDTO.setImages(images);
 
-        return ResponseEntity.ok(houseDTO);
-    }
 }
