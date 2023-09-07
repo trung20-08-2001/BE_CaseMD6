@@ -19,6 +19,9 @@ public interface IBillRepository extends JpaRepository<Bill,Integer> {
     @Query("SELECT SUM(b.totalPrice) FROM Bill b WHERE b.vendor = :account")
     Double getTotalPriceByAccount(@Param("account") Account account);
 
-//    @Query(nativeQuery = true,"select DISTINCT year(b.dateCheckout),* from Bill b")
-//    List<Bill> findBillByDateCheckout();
+   @Query(nativeQuery = true,value = "SELECT DISTINCT  YEAR(date_checkout) AS 'year' FROM Bill  where vendor_id=:idHost")
+    List<Integer> findAllYearActiveOfHost(@Param("idHost") int idHost);
+
+   @Query(value = "select sum(b.totalPrice) from Bill b where month(b.dateCheckout)=:month and year(b.dateCheckout)=:year and b.vendor.id=:idHost")
+    Optional<Double> calculateTotalRevenueByTime(@Param("month") int month, @Param("year") int year,@Param("idHost") int idHost);
 }
