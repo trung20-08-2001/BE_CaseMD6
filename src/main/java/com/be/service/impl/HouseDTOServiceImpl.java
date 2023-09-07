@@ -54,4 +54,10 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
          return new HouseDTO(house,images);
 
     }
+
+    @Override
+    public List<HouseDTO> findAllHouseDTO() {
+        List<House> houses=iHouseRepository.findAll();
+        return findHouseDTOs(houses);
+    }
 }

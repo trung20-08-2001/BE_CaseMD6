@@ -61,8 +61,6 @@ public class AdminController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-
     }
 
     @PostMapping("registration/approve/{accountId}")
@@ -115,6 +113,7 @@ public class AdminController {
         } else {
             return null;
         }
-
     }
+
+
 }
