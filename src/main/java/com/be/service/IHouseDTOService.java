@@ -10,7 +10,5 @@ public interface IHouseDTOService {
     List<HouseDTO> findTopHouseDTO();
     HouseDTO findHouseDTOByHouse(int idHouse);
 
-
-
     List<HouseDTO> findAllHouseDTO();
 }
