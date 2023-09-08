@@ -24,18 +24,6 @@ public class UserController {
     @Autowired
     JwtService jwtService;
 
-//    @PostMapping("/api/login")
-//    public AccountToken getLogin(@RequestBody Account account) {
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword()));
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        account = iAccountService.getAccountByUsernameAndPassword(account.getUsername(), account.getPassword());
-//        String token = jwtService.createToken(authentication);
-//        AccountToken accountToken = new AccountToken(account.getId(), account.getUsername(), account.getRole(), account.getAddress(), account.getPhone(), account.getAvatar(), account.getStatus(), token);
-//        return accountToken;
-//    }
-
     @PostMapping("/api/login")
     public ResponseEntity<?> getLogin(@RequestBody Account account) {
         Authentication authentication = authenticationManager.authenticate(
