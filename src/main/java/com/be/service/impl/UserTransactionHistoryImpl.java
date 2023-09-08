@@ -3,6 +3,7 @@ package com.be.service.impl;
 import com.be.model.*;
 import com.be.model.dto.UserTransactionHistoryDTO;
 import com.be.repository.IBillDetailRepository;
+import com.be.repository.IBillRepository;
 import com.be.repository.IStatusRepository;
 import com.be.service.IAccountService;
 import com.be.service.IUserTransactionHistoryService;
@@ -20,14 +21,16 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
     IStatusRepository iStatusRepository;
     @Autowired
     IAccountService iAccountService;
+    @Autowired
+    IBillRepository iBillRepository;
 
     @Override
     public Status findById_Status(int id) {
         return iStatusRepository.findById(id);
     }
 
-    public List<BillDetail> findAllByBill_User(Account user) {
-        return iBillDetailRepository.findAllByBill_UserOrderByBill_Status_NameDescBill_IdDesc(user);
+    public List<Bill> findAllByBill_User(Account user) {
+        return iBillRepository.findBillByAccountId(user.getId());
     }
 
     @Override
@@ -36,9 +39,8 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
         UserTransactionHistoryDTO userTransactionHistoryDTO;
         Status status = findById_Status(8);
         int countId = 0;
-        for (BillDetail billDetail : findAllByBill_User(user)) {
-            House house = billDetail.getHouse();
-            Bill bill = billDetail.getBill();
+        for (Bill bill : iBillRepository.findAllByUserOrderByStatusNameDescAndIdStatusAndId(user)) {
+            House house = bill.getHouse();
             userTransactionHistoryDTO = new UserTransactionHistoryDTO(countId++, house, bill, status);
             userTransactionHistoryDTOList.add(userTransactionHistoryDTO);
         }
@@ -47,7 +49,7 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
 
     @Override
     public House findHouseByBillId(int billId) {
-        return iBillDetailRepository.findHouseByBillId(billId);
+        return iBillRepository.findHouseByBillId(billId);
     }
 
     @Override

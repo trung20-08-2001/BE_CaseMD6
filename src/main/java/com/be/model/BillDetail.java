@@ -13,7 +13,5 @@ public class BillDetail {
     @ManyToOne
     private Bill bill;
     @ManyToOne
-    private House house;
-    @ManyToOne
     private Service service;
 }

@@ -1,11 +1,11 @@
 package com.be.service.impl;
 
 import com.be.model.*;
-import com.be.model.dto.UserTransactionHistoryDTO;
 import com.be.model.dto.VendorTransactionHistoryDTO;
 import com.be.repository.IBillDetailRepository;
+import com.be.repository.IBillRepository;
 import com.be.repository.IStatusRepository;
-import com.be.service.IUserTransactionHistoryService;
+
 import com.be.service.IVendorTransactionHistoryDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,8 @@ public class VendorTransactionHistoryDTOImpl implements IVendorTransactionHistor
     @Autowired
     IBillDetailRepository iBillDetailRepository;
     @Autowired
+    IBillRepository iBillRepository;
+    @Autowired
     IStatusRepository iStatusRepository;
 
     @Override
@@ -25,9 +27,8 @@ public class VendorTransactionHistoryDTOImpl implements IVendorTransactionHistor
         List<VendorTransactionHistoryDTO> vendorTransactionHistoryDTOList = new ArrayList<>();
         VendorTransactionHistoryDTO vendorTransactionHistoryDTO;
         int countId = 0;
-        for (BillDetail billDetail : iBillDetailRepository.findAllByBill_VendorOrderByBill_Status_IdAscBill_IdDesc(vendor)) {
-            House house = billDetail.getHouse();
-            Bill bill = billDetail.getBill();
+        for (Bill bill : iBillRepository.findAllByVendorOrderByDescendingIdAndStatusId(vendor)) {
+            House house = bill.getHouse();
             vendorTransactionHistoryDTO = new VendorTransactionHistoryDTO(countId++, house, bill);
             vendorTransactionHistoryDTOList.add(vendorTransactionHistoryDTO);
         }
