@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-public interface IHouseRepository extends JpaRepository<House,Integer> {
 
+public interface IHouseRepository extends JpaRepository<House, Integer> {
     @Query(value = "select h from House h where h.name like '%'+:name+'%'")
     List<House> findHouseByName(@Param("name") String name);
 
@@ -18,7 +18,12 @@ public interface IHouseRepository extends JpaRepository<House,Integer> {
     @Query("SELECT COUNT(h) FROM House h WHERE h.account = :account")
     int countHousesByAccount(Account account);
 
-//    @Query(value = "select h from House h order by h.id desc limit 6")
-//    List<House> findTopHouse();
+    @Query("SELECT h FROM House h WHERE h.name LIKE CONCAT('%', :nameHouse, '%') AND h.status.id = :statusId and h.account.id=:accountId")
+    List<House> findAllByNameAndStatus(@Param("nameHouse") String nameHouse, @Param("statusId") int statusId, @Param("accountId") int accountId);
 
+    @Query("SELECT h FROM House h WHERE h.name LIKE CONCAT('%', :nameHouse, '%') and h.account.id=:accountId")
+    List<House> findAllByName(@Param("nameHouse") String nameHouse, @Param("accountId") int accountId);
+
+    @Query("select h from House h where h.status.id = :statusId and h.account.id=:accountId")
+    List<House> findAllByStatus(@Param("statusId") int statusId, @Param("accountId") int accountId);
 }
