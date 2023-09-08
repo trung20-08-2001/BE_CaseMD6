@@ -9,11 +9,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface IBillDetailRepository extends JpaRepository<BillDetail,Integer> {
-    List<BillDetail> findAllByBill_User(Account user);
+public interface IBillDetailRepository extends JpaRepository<BillDetail, Integer> {
+    List<BillDetail> findAllByBill_UserOrderByBill_Status_NameDescBill_IdDesc(Account user);
+
+    List<BillDetail> findAllByBill_VendorOrderByBill_Status_IdAscBill_IdDesc(Account vendor);
 
     @Query("SELECT bd.house FROM BillDetail bd WHERE bd.bill.id = :billId")
     House findHouseByBillId(int billId);
 
     @Query("SELECT bd.bill FROM BillDetail bd WHERE bd.bill.id = :idBill")
-    Bill findBillByBillDetailIdBill(int idBill);}
+    Bill findBillByBillDetailIdBill(int idBill);
+}

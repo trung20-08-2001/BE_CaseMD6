@@ -27,7 +27,7 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
     }
 
     public List<BillDetail> findAllByBill_User(Account user) {
-        return iBillDetailRepository.findAllByBill_User(user);
+        return iBillDetailRepository.findAllByBill_UserOrderByBill_Status_NameDescBill_IdDesc(user);
     }
 
     @Override
