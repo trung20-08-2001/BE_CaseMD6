@@ -8,8 +8,14 @@ import java.util.List;
 
 public interface IHouseService {
     House save(House house);
+
     List<House> findHouseByAccount(int idAccount);
 
     House findById(int id);
+    List<House> findAllByName(String nameHouse, int accountId);
+
+    List<House> findAllByNameAndStatus(String nameHouse, int statusId, int accountId);
+
+    List<House> findAllByStatus(int statusId, int accountId);
 
 }

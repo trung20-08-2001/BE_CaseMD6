@@ -28,6 +28,22 @@ public class HouseServiceImpl implements IHouseService {
         return iHouseRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public List<House> findAllByName(String nameHouse, int accountId) {
+
+        return iHouseRepository.findAllByName(nameHouse,accountId);
+    }
+
+    @Override
+    public List<House> findAllByNameAndStatus(String nameHouse, int statusId,int accountId) {
+        return iHouseRepository.findAllByNameAndStatus(nameHouse,statusId,accountId);
+    }
+
+    @Override
+    public List<House> findAllByStatus(int statusId, int accountId) {
+        return iHouseRepository.findAllByStatus(statusId,accountId);
+    }
+
 
 
 }

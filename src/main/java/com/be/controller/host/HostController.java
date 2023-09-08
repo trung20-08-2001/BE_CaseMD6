@@ -1,11 +1,15 @@
 package com.be.controller.host;
 
 import com.be.model.Account;
+import com.be.model.Bill;
 import com.be.model.Role;
+import com.be.model.dto.Revenue;
 import com.be.repository.IAccountRepository;
+import com.be.repository.IBillRepository;
 import com.be.repository.IRoleRepository;
 import com.be.repository.IStatusRepository;
 import com.be.service.IAccountService;
+import com.be.service.IBillService;
 import com.be.service.JwtService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +19,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.net.Authenticator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
@@ -31,6 +37,8 @@ public class HostController {
     AuthenticationManager authenticationManager;
     @Autowired
     IStatusRepository iStatusRepository;
+    @Autowired
+    IBillService iBillService;
 
     @PostMapping("/register")
     public ResponseEntity<Account> createHostAcc(@RequestBody Account account) {
@@ -48,5 +56,10 @@ public class HostController {
         } else {
             return null;
         }
+    }
+
+    @GetMapping("/findRevenueOfHost/{idHost}")
+    public List<Revenue> findRevenueOfHost(@PathVariable int idHost){
+        return iBillService.findRevenueOfHost(idHost);
     }
 }
