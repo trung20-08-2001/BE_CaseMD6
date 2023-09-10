@@ -28,4 +28,9 @@ public interface IBillRepository extends JpaRepository<Bill,Integer> {
     @Query(value = "SELECT b.house from Bill b where b.id=:billId")
     House findHouseByBillId(@Param("billId") int billId);
 
+    @Query("SELECT b FROM Bill b JOIN b.status bs WHERE b.vendor = ?1 ORDER BY b.id DESC, bs.id DESC")
+    List<Bill> findAllByVendorOrderByDescendingIdAndStatusId(Account vendor);
+
+    @Query("SELECT b FROM Bill b JOIN b.status bs WHERE b.user = ?1 ORDER BY bs.name DESC, b.id DESC")
+    List<Bill> findAllByUserOrderByStatusNameDescAndIdStatusAndId(Account user);
 }

@@ -39,7 +39,7 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
         UserTransactionHistoryDTO userTransactionHistoryDTO;
         Status status = findById_Status(8);
         int countId = 0;
-        for (Bill bill : findAllByBill_User(user)) {
+        for (Bill bill : iBillRepository.findAllByUserOrderByStatusNameDescAndIdStatusAndId(user)) {
             House house = bill.getHouse();
             userTransactionHistoryDTO = new UserTransactionHistoryDTO(countId++, house, bill, status);
             userTransactionHistoryDTOList.add(userTransactionHistoryDTO);
