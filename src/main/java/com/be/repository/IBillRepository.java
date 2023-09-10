@@ -39,4 +39,6 @@ public interface IBillRepository extends JpaRepository<Bill,Integer> {
 
     @Query("SELECT b FROM Bill b JOIN b.status bs WHERE b.user = ?1 ORDER BY bs.name DESC, b.id DESC")
     List<Bill> findAllByUserOrderByStatusNameDescAndIdStatusAndId(Account user);
+
+
 }

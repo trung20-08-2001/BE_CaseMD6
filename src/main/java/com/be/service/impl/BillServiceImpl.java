@@ -1,5 +1,6 @@
 package com.be.service.impl;
 
+import com.be.model.Bill;
 import com.be.model.dto.Revenue;
 import com.be.repository.IBillRepository;
 import com.be.service.IBillService;
@@ -37,4 +38,6 @@ public class BillServiceImpl implements IBillService {
         }
         return result;
     }
+
+
 }

@@ -22,4 +22,9 @@ class FeedBackServiceImpl implements IFeedBackService {
     public List<Feedback> findFeedbackByStatusAndHouse(int idHouse) {
         return iFeedbackRepository.findFeedbackByStatusAndHouse(idHouse);
     }
+
+    @Override
+    public Feedback findFeedbackByHouseAndUser(int idUser, int idHouse) {
+        return iFeedbackRepository.getFeedbackByHouseAndUser(idHouse,idUser).orElse(null);
+    }
 }
