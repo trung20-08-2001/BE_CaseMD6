@@ -48,6 +48,14 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
     }
 
     @Override
+    public HouseDTO findHouseDTOByHouse(int idHouse) {
+         House house=iHouseRepository.findById(idHouse).get();
+         List<Image> images=iImageRepository.findImageByIdHouse(house.getId());
+         return new HouseDTO(house,images);
+
+    }
+
+    @Override
     public List<HouseDTO> findAllHouseDTO() {
         List<House> houses=iHouseRepository.findAll();
         return findHouseDTOs(houses);

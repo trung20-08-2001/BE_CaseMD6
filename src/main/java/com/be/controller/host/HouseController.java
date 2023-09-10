@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("houses")
@@ -39,6 +40,12 @@ public class HouseController {
     public List<HouseDTO> findTopHouse() {
         return iHouseDTOService.findTopHouseDTO();
     }
+
+    @GetMapping("/searchhouse/{idHouse}")
+    public HouseDTO findById(@PathVariable int idHouse){
+        return iHouseDTOService.findHouseDTOByHouse(idHouse);
+    }
+
 
     @GetMapping("/findAllHouse")
     public List<HouseDTO> findAllHouse() {
