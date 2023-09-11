@@ -33,7 +33,7 @@ public class VendorTransactionHistoryDTOController {
     @GetMapping("/{id}")
     public List<VendorTransactionHistoryDTO> findAllBill_Vendor(@PathVariable int id) {
         Account vendor = iAccountService.findById(id);
-        return iVendorTransactionHistoryDTOService.findBill_rentingHouse_Vendor(vendor);
+        return iVendorTransactionHistoryDTOService.findAllBill_Vendor(vendor);
     }
 
     @PostMapping("/{id}/house")
@@ -46,7 +46,7 @@ public class VendorTransactionHistoryDTOController {
 
     @PostMapping("/{id}/bill")
     public Bill updateStatus_bill(@PathVariable int id, @RequestBody Bill bill) {
-        Bill bill1 = iUserTransactionHistoryService.findBillByBillDetailIdBill(id);
+        Bill bill1 = iUserTransactionHistoryService.findById(id);
         Status status = bill.getStatus();
         bill1.setStatus(status);
         return iBillRepository.save(bill1);

@@ -25,6 +25,8 @@ class FeedBackServiceImpl implements IFeedBackService {
 
     @Override
     public Feedback findFeedbackByHouseAndUser(int idUser, int idHouse) {
-        return iFeedbackRepository.getFeedbackByHouseAndUser(idHouse,idUser).orElse(null);
+        List<Feedback> feedbacks= iFeedbackRepository.getFeedbackByHouseAndUser(idHouse,idUser).orElse(null);
+        if (feedbacks == null || feedbacks.isEmpty()) return null;
+        else return feedbacks.get(0);
     }
 }
