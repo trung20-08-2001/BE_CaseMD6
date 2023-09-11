@@ -34,7 +34,7 @@ public class UserTransactionHistoryDTOController {
     }
 
     @PostMapping("/{id}/house")
-    public House findHouseByBillId(@PathVariable int id, @RequestParam int idStatus) {
+    public House updateStatus_house(@PathVariable int id, @RequestParam int idStatus) {
         Status status = iUserTransactionHistoryService.findById_Status(idStatus);
         House house = iUserTransactionHistoryService.findHouseByBillId(id);
         house.setStatus(status);
@@ -42,9 +42,9 @@ public class UserTransactionHistoryDTOController {
     }
 
     @PostMapping("/{id}/bill")
-    public Bill findBillByBillDetailIdBill(@PathVariable int id, @RequestParam int idStatus) {
+    public Bill updateStatus_bill(@PathVariable int id, @RequestParam int idStatus) {
         Status status = iUserTransactionHistoryService.findById_Status(idStatus);
-        Bill bill = iUserTransactionHistoryService.findBillByBillDetailIdBill(id);
+        Bill bill = iUserTransactionHistoryService.findById(id);
         bill.setStatus(status);
         return iBillRepository.save(bill);
     }

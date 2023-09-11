@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.List;
 
 public interface IHouseRepository extends JpaRepository<House, Integer> {
@@ -29,4 +30,7 @@ public interface IHouseRepository extends JpaRepository<House, Integer> {
     List<House> findAllByStatus(@Param("statusId") int statusId, @Param("accountId") int accountId);
     @Query("select h from House h where h.id= :houseId")
     House findById(@Param("houseId")int houseId);
+
+    @Query(value = "select h from House h order by  h.id desc")
+    List<House> findAllHouse();
 }

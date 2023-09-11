@@ -11,6 +11,6 @@ import java.util.List;
 public interface IUserTransactionHistoryService {
     List<UserTransactionHistoryDTO> findAllBill_User(Account user);
     House findHouseByBillId(int billId);
-    Bill findBillByBillDetailIdBill(int idBill);
+    Bill findById(int idBill);
     Status findById_Status(int id);
 }

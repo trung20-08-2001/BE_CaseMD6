@@ -12,8 +12,8 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int numberOfStars;
-    private String comment;
     private Date date;
+    private String comment;
     @ManyToOne
     private House house;
     @ManyToOne

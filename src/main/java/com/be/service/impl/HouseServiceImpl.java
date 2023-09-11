@@ -3,6 +3,7 @@ package com.be.service.impl;
 import com.be.model.House;
 import com.be.model.Image;
 import com.be.model.dto.HouseDTO;
+import com.be.model.dto.HouseDTO;
 import com.be.repository.IHouseRepository;
 import com.be.service.IHouseService;
 import com.be.service.IImageService;
@@ -27,6 +28,11 @@ public class HouseServiceImpl implements IHouseService {
     @Override
     public List<House> findHouseByAccount(int idAccount) {
         return iHouseRepository.findHouseByAccount(idAccount);
+    }
+
+    @Override
+    public House findById1(int id) {
+        return iHouseRepository.findById(id);
     }
 
     @Override
@@ -56,5 +62,7 @@ public class HouseServiceImpl implements IHouseService {
             return null;
         }
     }
+
+
 
 }

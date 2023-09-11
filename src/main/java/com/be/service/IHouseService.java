@@ -11,6 +11,7 @@ public interface IHouseService {
 
     List<House> findHouseByAccount(int idAccount);
 
+    House findById1(int id);
     List<House> findAllByName(String nameHouse, int accountId);
 
     List<House> findAllByNameAndStatus(String nameHouse, int statusId, int accountId);
