@@ -1,7 +1,9 @@
 package com.be.controller.host;
 
 import com.be.model.Account;
+import com.be.model.House;
 import com.be.model.Role;
+import com.be.model.dto.HouseDTO;
 import com.be.repository.IAccountRepository;
 import com.be.repository.IRoleRepository;
 import com.be.repository.IStatusRepository;
@@ -49,4 +51,5 @@ public class HostController {
             return null;
         }
     }
+
 }

@@ -3,6 +3,7 @@ package com.be.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Data
@@ -12,6 +13,7 @@ public class Feedback {
     private int id;
     private int numberOfStars;
     private String comment;
+    private Date date;
     @ManyToOne
     private House house;
     @ManyToOne

@@ -16,5 +16,5 @@ public interface IHouseService {
     List<House> findAllByNameAndStatus(String nameHouse, int statusId, int accountId);
 
     List<House> findAllByStatus(int statusId, int accountId);
-
+    HouseDTO findById(int houseId);
 }
