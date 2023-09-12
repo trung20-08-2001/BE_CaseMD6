@@ -2,10 +2,12 @@ package com.be.repository;
 
 import com.be.model.Account;
 import com.be.model.House;
+import com.be.model.dto.HouseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.List;
 
 public interface IHouseRepository extends JpaRepository<House, Integer> {
@@ -26,4 +28,9 @@ public interface IHouseRepository extends JpaRepository<House, Integer> {
 
     @Query("select h from House h where h.status.id = :statusId and h.account.id=:accountId")
     List<House> findAllByStatus(@Param("statusId") int statusId, @Param("accountId") int accountId);
+    @Query("select h from House h where h.id= :houseId")
+    House findById(@Param("houseId")int houseId);
+
+    @Query(value = "select h from House h order by  h.id desc")
+    List<House> findAllHouse();
 }

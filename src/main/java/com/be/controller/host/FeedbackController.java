@@ -1,34 +1,27 @@
 package com.be.controller.host;
 
 import com.be.model.Account;
-import com.be.model.House;
-import com.be.model.Bill;
+import com.be.model.Feedback;
 import com.be.model.Role;
-import com.be.model.dto.HouseDTO;
 import com.be.model.dto.Revenue;
-import com.be.repository.IAccountRepository;
-import com.be.repository.IBillRepository;
 import com.be.repository.IRoleRepository;
 import com.be.repository.IStatusRepository;
 import com.be.service.IAccountService;
 import com.be.service.IBillService;
+import com.be.service.IFeedBackService;
 import com.be.service.JwtService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.net.Authenticator;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
-public class HostController {
+@RequestMapping("api/feedback")
+public class FeedbackController {
     @Autowired
     IAccountService iAccountService;
     @Autowired
@@ -41,7 +34,8 @@ public class HostController {
     IStatusRepository iStatusRepository;
     @Autowired
     IBillService iBillService;
-
+    @Autowired
+    IFeedBackService iFeedBackService;
     @PostMapping("/register")
     public ResponseEntity<Account> createHostAcc(@RequestBody Account account) {
         Role role = iRoleRepository.findByName("ROLE_HOST");
@@ -65,4 +59,17 @@ public class HostController {
         return iBillService.findRevenueOfHost(idHost);
     }
 
+    @GetMapping("getAllFeedback/{houseId}")
+    public List<Feedback> getAllByHouseId(@PathVariable int houseId) {
+        return iFeedBackService.getAllByHouse_Id(houseId);
+    }
+    @PostMapping("updateFeedback/{feedbackId}")
+    public Feedback updateFeedback(@PathVariable int feedbackId){
+        return iFeedBackService.updateFeedback(feedbackId);
+    }
+    @GetMapping("getAllByStar/{houseId}/{star}")
+    public List<Feedback> getAllByStar(@PathVariable int houseId,
+                                       @PathVariable int star) {
+        return iFeedBackService.getAllByStar(houseId,star);
+    }
 }

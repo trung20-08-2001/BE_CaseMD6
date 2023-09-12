@@ -46,7 +46,7 @@ public class VendorTransactionHistoryDTOController {
 
     @PostMapping("/{id}/bill")
     public Bill updateStatus_bill(@PathVariable int id, @RequestBody Bill bill) {
-        Bill bill1 = iUserTransactionHistoryService.findBillByBillDetailIdBill(id);
+        Bill bill1 = iUserTransactionHistoryService.findById(id);
         Status status = bill.getStatus();
         bill1.setStatus(status);
         bill1.setTotalPrice(bill.getTotalPrice());

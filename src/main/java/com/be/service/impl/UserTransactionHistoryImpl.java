@@ -53,7 +53,7 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
     }
 
     @Override
-    public Bill findBillByBillDetailIdBill(int idBill) {
-        return iBillDetailRepository.findBillByBillDetailIdBill(idBill);
+    public Bill findById(int idBill) {
+        return iBillRepository.findById(idBill).get();
     }
 }

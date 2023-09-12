@@ -1,5 +1,6 @@
 package com.be.service;
 
+import com.be.model.Bill;
 import com.be.model.dto.Revenue;
 
 import java.util.List;
