@@ -26,7 +26,6 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
     IImageRepository iImageRepository;
 
     public List<HouseDTO> findHouseDTOs(List<House> houses){
-        System.out.println(houses);
         List<HouseDTO> result = new ArrayList<>();
         for (int i = 0; i < houses.size(); i++) {
             List<Image> images = iImageRepository.findImageByIdHouse(houses.get(i).getId());
