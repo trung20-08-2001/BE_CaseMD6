@@ -49,6 +49,8 @@ public class VendorTransactionHistoryDTOController {
         Bill bill1 = iUserTransactionHistoryService.findById(id);
         Status status = bill.getStatus();
         bill1.setStatus(status);
+        bill1.setTotalPrice(bill.getTotalPrice());
+        bill1.setDateCheckout(bill.getDateCheckout());
         return iBillRepository.save(bill1);
     }
 }
