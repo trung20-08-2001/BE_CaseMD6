@@ -24,5 +24,4 @@ public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     @Query(value = "select f from Feedback f where f.house.id= :idHouse and f.account.id=:idUser and f.comment=null and f.date=null order by f.id desc")
     Optional<List<Feedback>> getFeedbackByHouseAndUser(@Param("idHouse") int idHouse, @Param("idUser")int idUser);
-
 }

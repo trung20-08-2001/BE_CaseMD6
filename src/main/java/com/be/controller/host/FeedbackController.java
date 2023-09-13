@@ -72,4 +72,9 @@ public class FeedbackController {
                                        @PathVariable int star) {
         return iFeedBackService.getAllByStar(houseId,star);
     }
+
+    @GetMapping("/findAllFeedbackByIdVendor/{idVendor}")
+    public List<Feedback> getAllByIdVendor(@PathVariable int idVendor) {
+        return iFeedBackService.getFeedbacksByAccountId(idVendor);
+    }
 }
