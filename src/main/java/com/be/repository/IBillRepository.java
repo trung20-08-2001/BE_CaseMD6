@@ -41,4 +41,6 @@ public interface IBillRepository extends JpaRepository<Bill,Integer> {
     List<Bill> findAllByUserOrderByStatusNameDescAndIdStatusAndId(Account user);
 
 
+    @Query("select b from Bill b where b.house.id=:idHouse and b.dateCheckin>=CURRENT_DATE ")
+    List<Bill> findDateOfBill(int idHouse);
 }
