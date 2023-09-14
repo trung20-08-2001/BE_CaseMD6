@@ -15,7 +15,22 @@ import java.util.List;
 public class OrderServiceImpl implements IOrderService {
     @Autowired
     IBillRepository iBillRepository;
+    @Override
+    public boolean checkDateOrder(Date dateCheckin, Date dateCheckout,int idHouse) {
+        List<Bill> billList = iBillRepository.findBillByStatusAndHouse(idHouse);
+        System.out.println(billList.toString());
+        for (Bill bill : billList) {
+            if (bill.getDateCheckin().compareTo(dateCheckin) >= 0 && bill.getDateCheckout().compareTo(dateCheckout) <= 0) {
+               return false;
+            }
+        }
+        return true;
+    }
 
+    @Override
+    public void saveBill(Bill bill) {
+        iBillRepository.save(bill);
+    }
 
     @Override
     public List<LocalDate> checkDateOrder(int idHouse) {
@@ -25,11 +40,6 @@ public class OrderServiceImpl implements IOrderService {
             getDateRange(bill.getDateCheckin().toLocalDate(), bill.getDateCheckout().toLocalDate(),dateRange);
         }
         return dateRange;
-    }
-
-    @Override
-    public void saveBill(Bill bill) {
-        iBillRepository.save(bill);
     }
 
     @Override
@@ -46,7 +56,4 @@ public class OrderServiceImpl implements IOrderService {
         }
         return dateRange;
     }
-
-
-
 }

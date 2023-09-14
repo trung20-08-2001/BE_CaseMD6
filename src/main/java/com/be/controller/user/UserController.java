@@ -30,7 +30,6 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         account = iAccountService.getAccountByUsernameAndPassword(account.getUsername(), account.getPassword());
-        System.out.println(account);
         if (account != null) {
             if (account.getStatus().getId() == 3) {
                 ErrorResponse errorResponse = new ErrorResponse("Tài khoản đã bị khóa");

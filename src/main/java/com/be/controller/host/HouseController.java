@@ -72,7 +72,7 @@ public class HouseController {
                                                           @PathVariable int accountId,
                                                           @PathVariable int statusId) {
         List<HouseDTO> result = new ArrayList<>();
-        List<House> houses = iHouseService.findAllByNameAndStatus(name, statusId,accountId);
+        List<House> houses = iHouseService.findAllByNameAndStatus(name, statusId, accountId);
         if (houses == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -87,7 +87,7 @@ public class HouseController {
     public ResponseEntity<List<HouseDTO>> getHousesByStatus(@PathVariable int statusId,
                                                             @PathVariable int accountId) {
         List<HouseDTO> result = new ArrayList<>();
-        List<House> houses = iHouseService.findAllByStatus(statusId,accountId);
+        List<House> houses = iHouseService.findAllByStatus(statusId, accountId);
         if (houses == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -96,6 +96,16 @@ public class HouseController {
             result.add(new HouseDTO(houses.get(i), images));
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("houseDetail/{houseId}")
+    public ResponseEntity<HouseDTO> getHouseById(@PathVariable int houseId) {
+        HouseDTO houseDTO = iHouseService.findById(houseId);
+        if (houseDTO != null) {
+            return new ResponseEntity<>(houseDTO, HttpStatus.OK);
+        } else {
+            return null;
+        }
     }
 
 }

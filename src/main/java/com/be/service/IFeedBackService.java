@@ -9,4 +9,7 @@ public interface IFeedBackService {
     List<Feedback> findFeedbackByStatusAndHouse(int idHouse);
 
     Feedback findFeedbackByHouseAndUser(int idUser,int idHouse);
+    List<Feedback> getAllByHouse_Id(int houseId);
+    Feedback updateFeedback(int feedbackId);
+    List<Feedback> getAllByStar(int houseId,int start);
 }
