@@ -15,4 +15,6 @@ public interface IBillDetailRepository extends JpaRepository<BillDetail,Integer>
 
     @Query("SELECT bd.bill FROM BillDetail bd WHERE bd.bill.id = :idBill")
     Bill findBillByBillDetailIdBill(int idBill);
+
+
 }
