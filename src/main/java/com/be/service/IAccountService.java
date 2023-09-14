@@ -24,4 +24,8 @@ public interface IAccountService extends UserDetailsService {
     List<Account> findAllByStatus(int status_id);
     void  updateStatus(int status_id,int idAccount);
     List<Account> findAllByRole(int role_id);
+
+    Account findAccountAdmin();
+    List<Account> findAccountHost();
+
 }

@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
 public class ChatController {
@@ -14,15 +15,16 @@ public class ChatController {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    @MessageMapping("/message")
-    @SendTo("/chatroom/public")
-    public Message receiveMessage(@Payload Message message){
+    @MessageMapping("/chatroom")
+    @SendTo("/chatroom/messages")
+    public Message send( Message message){
         return message;
     }
 
-    @MessageMapping("/private-message")
-    public Message recMessage(@Payload Message message){
-        simpMessagingTemplate.convertAndSendToUser(message.getReceiverAccount().getUsername(),"/private",message);
+    @MessageMapping("/private/{userId}")
+    @SendTo("/private/{userId}")
+    public Message privateMessage(Message message) {
         return message;
     }
+
 }

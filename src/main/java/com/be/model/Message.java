@@ -3,6 +3,7 @@ package com.be.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -15,5 +16,5 @@ public class Message {
     @ManyToOne
     private Account receiverAccount;
     private String message;
-    private String date;
+    private Date date;
 }

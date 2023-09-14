@@ -5,6 +5,7 @@ import com.be.model.Account;
 import com.be.model.House;
 import com.be.service.IAccountService;
 
+import com.be.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import java.util.List;
 public class AccountController {
     @Autowired
     IAccountService iAccountService;
+    @Autowired
+    IMessageService iMessageService;
 
     @GetMapping
     public List<Account> getAll() {
@@ -60,6 +63,18 @@ public class AccountController {
        return iAccountService.getAccountByUsernameAndPhone(account.getUsername(), account.getPhone());
     }
 
+    @GetMapping("/findAccountAdmin")
+    public Account findAccountAdmin(){
+        return iAccountService.findAccountAdmin();
+    }
 
+    @GetMapping("/findAccountHost")
+    public List<Account> findAccountHost(){
+        return  iAccountService.findAccountHost();
+    }
 
+    @GetMapping("/findAccountsUserMessageToAccountHost/{idAccountHost}")
+    private List<Account> findAccountsUserMessageToAccountHost(@PathVariable int idAccountHost){
+        return  iMessageService.findAccountsUserMessageToAccountHost(idAccountHost);
+    }
 }
