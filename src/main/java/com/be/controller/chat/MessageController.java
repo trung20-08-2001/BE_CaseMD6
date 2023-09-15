@@ -20,8 +20,6 @@ public class MessageController {
         return iMessageService.findMessagesByReceiverAndSender(idReceiverAccount,idSenderAccount);
     }
 
-
-
     @PostMapping("/save")
     private void save(@RequestBody Message message){
         iMessageService.save(message);
