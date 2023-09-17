@@ -66,4 +66,9 @@ public class FeedbackServiceImpl implements IFeedBackService {
             return null;
         }
     }
+
+    @Override
+    public List<Feedback> getAllFeedbackByComment(int houseId) {
+        return iFeedbackRepository.getAllFeedbackByComment(houseId);
+    }
 }

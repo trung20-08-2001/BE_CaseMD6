@@ -19,8 +19,8 @@ public class EmailController {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("mainzoe9x@gmai.com");
             message.setTo(email);
-            message.setSubject("Thông báo về kết quả đăng kí làm chủ nhà");
-            message.setText("Thông tin của bạn không đủ điều kiện để trở thành người cho thuê nhà. Hãy liên hệ tới admin để biết thêm chi tiết");
+            message.setSubject("Notification of registration results at home");
+            message.setText("Your information does not qualify to become a landlord. Please contact admin for more details!");
             emailSender.send(message);
             return "Email sent successfully!";
         } catch (MailException e) {

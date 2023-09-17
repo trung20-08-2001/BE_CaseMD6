@@ -78,6 +78,11 @@ public class AccountServiceImpl implements IAccountService {
         return iAccountRepository.findAccountByRole(role_id);
     }
 
+    @Override
+    public Account findByName(String username) {
+        return iAccountRepository.getAccountByUsername(username);
+    }
+
 
     @Override
     public void edit(Account account) {
