@@ -1,12 +1,12 @@
 package com.be.repository;
 
 import com.be.model.Feedback;
+import com.be.model.House;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -28,5 +28,4 @@ public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
 
     @Query("SELECT fb FROM Feedback fb WHERE fb.house.id= :houseId and fb.comment != '' order by fb.id desc ")
     List<Feedback> getAllFeedbackByComment(@Param("houseId")int houseId);
-
 }

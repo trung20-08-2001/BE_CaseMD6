@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class OrderServiceImpl implements IOrderService {
     @Autowired
@@ -27,5 +30,30 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public void saveBill(Bill bill) {
         iBillRepository.save(bill);
+    }
+
+    @Override
+    public List<LocalDate> checkDateOrder(int idHouse) {
+        List<Bill> bills = iBillRepository.findDateOfBill(idHouse);
+        List<LocalDate> dateRange = new ArrayList<>();
+        for (Bill bill : bills) {
+            getDateRange(bill.getDateCheckin().toLocalDate(), bill.getDateCheckout().toLocalDate(),dateRange);
+        }
+        return dateRange;
+    }
+
+    @Override
+    public List<Bill> findDateOfBill(int idHouse) {
+        return iBillRepository.findDateOfBill(idHouse);
+    }
+
+    @Override
+    public List<LocalDate> getDateRange(LocalDate startDate, LocalDate endDate, List<LocalDate> dateRange) {
+        LocalDate currentDate = startDate;
+        while (!currentDate.isAfter(endDate)) {
+            dateRange.add(currentDate);
+            currentDate = currentDate.plusDays(1);
+        }
+        return dateRange;
     }
 }

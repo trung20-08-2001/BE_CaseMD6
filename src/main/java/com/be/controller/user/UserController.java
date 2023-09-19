@@ -1,7 +1,6 @@
 package com.be.controller.user;
 
 import com.be.model.*;
-import com.be.repository.IAccountRepository;
 import com.be.service.IAccountService;
 import com.be.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,7 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(account.getUsername(), account.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         account = iAccountService.getAccountByUsernameAndPassword(account.getUsername(), account.getPassword());
+        System.out.println(account);
         if (account != null) {
             if (account.getStatus().getId() == 3) {
                 ErrorResponse errorResponse = new ErrorResponse("Tài khoản đã bị khóa");
@@ -42,13 +42,15 @@ public class UserController {
         } else {
             return null;
         }
-
-
+    }
+    private int x = 1;
+    public void increaseX() {
+        x++;
     }
 
-    @PostMapping("/loginByGoogle")
+    @PostMapping("/loginBySocialNetwork")
     public ResponseEntity<?> loginByGoogle(@RequestBody Account account) {
-        Account account1 = iAccountService.findByName(account.getUsername());
+        Account account1 = iAccountService.findAccountByPassword(account.getPassword());
         if (account1 != null) {
             if (account1.getStatus().getId() == 3) {
                 ErrorResponse errorResponse = new ErrorResponse("Tài khoản đã bị khóa");
@@ -57,18 +59,21 @@ public class UserController {
                 return authenticateAccount(account1);
             }
         } else {
-            Account account2 = new Account();
-            account2.setUsername(account.getUsername());
-            account2.setPassword("LoginByGoogle");
-            account2.setAvatar(account.getAvatar());
+            Account newAccount = new Account();
+            newAccount.setUsername(account.getUsername()+x);
+            newAccount.setPassword(account.getPassword());
+            newAccount.setAvatar(account.getAvatar());
+            newAccount.setEmail(account.getEmail());
+            newAccount.setFullName(account.getFullName());
             Role role = new Role();
             role.setId(3);
             Status status = new Status();
             status.setId(1);
-            account2.setRole(role);
-            account2.setStatus(status);
-            iAccountService.saveAccount(account2);
-            return authenticateAccount(account2);
+            newAccount.setRole(role);
+            newAccount.setStatus(status);
+            iAccountService.saveAccount(newAccount);
+            increaseX();
+            return authenticateAccount(newAccount);
         }
     }
 

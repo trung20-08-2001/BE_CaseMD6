@@ -26,7 +26,6 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
     IImageRepository iImageRepository;
 
     public List<HouseDTO> findHouseDTOs(List<House> houses){
-        System.out.println(houses);
         List<HouseDTO> result = new ArrayList<>();
         for (int i = 0; i < houses.size(); i++) {
             List<Image> images = iImageRepository.findImageByIdHouse(houses.get(i).getId());
@@ -43,7 +42,7 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
 
     @Override
     public List<HouseDTO> findTopHouseDTO() {
-        List<House> houses = entityManager.createQuery("select h from House h order by h.numberOfHire desc ",House.class).setMaxResults(6).getResultList();
+        List<House> houses = entityManager.createQuery("select h from House h order by h.numberOfHire desc ",House.class).setMaxResults(3).getResultList();
         return findHouseDTOs(houses);
     }
 

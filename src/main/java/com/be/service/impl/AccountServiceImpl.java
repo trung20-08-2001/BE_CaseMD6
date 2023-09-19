@@ -6,6 +6,7 @@ import com.be.model.House;
 import com.be.model.dto.AccountUserDTO;
 import com.be.repository.IAccountRepository;
 import com.be.repository.IBillRepository;
+import com.be.repository.IMessageRepository;
 import com.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +25,8 @@ public class AccountServiceImpl implements IAccountService {
     IAccountRepository iAccountRepository;
     @Autowired
     IBillRepository iBillRepository;
+    @Autowired
+    IMessageRepository iMessageRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = iAccountRepository.getAccountByUsername(username);
@@ -81,6 +84,21 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public Account findByName(String username) {
         return iAccountRepository.getAccountByUsername(username);
+    }
+
+    @Override
+    public Account findAccountAdmin() {
+        return  iAccountRepository.findAccountByRole(1).get(0);
+    }
+
+    @Override
+    public List<Account> findAccountHost() {
+        return iAccountRepository.findAccountByRole(2);
+    }
+
+    @Override
+    public Account findAccountByPassword(String password) {
+        return iAccountRepository.findAccountByPassword(password);
     }
 
 
