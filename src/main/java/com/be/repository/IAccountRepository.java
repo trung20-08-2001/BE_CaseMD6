@@ -50,4 +50,6 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
 
     @Query("SELECT a FROM Account a WHERE a.username LIKE %:username% and (a.role.id=2 or a.role.name='ROLE_HOST') and (a.status.name!='BLOCKED' or a.status.id!=3)")
     List<Account> findAccountHostByUsername(@Param("username") String username);
+    @Query("select a from Account a where a.password= :password")
+    Account findAccountByPassword(@Param("password") String password);
 }

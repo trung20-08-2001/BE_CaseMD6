@@ -63,13 +63,18 @@ public class FeedbackController {
     public List<Feedback> getAllByHouseId(@PathVariable int houseId) {
         return iFeedBackService.getAllByHouse_Id(houseId);
     }
-    @PostMapping("updateFeedback/{feedbackId}")
-    public Feedback updateFeedback(@PathVariable int feedbackId){
-        return iFeedBackService.updateFeedback(feedbackId);
+    @PostMapping("updateFeedback/{feedbackId}/{houseId}")
+    public List<Feedback> updateFeedback(@PathVariable int feedbackId,@PathVariable int houseId){
+        iFeedBackService.updateFeedback(feedbackId);
+        return iFeedBackService.getAllByHouse_Id(houseId);
     }
     @GetMapping("getAllByStar/{houseId}/{star}")
     public List<Feedback> getAllByStar(@PathVariable int houseId,
                                        @PathVariable int star) {
         return iFeedBackService.getAllByStar(houseId,star);
+    }
+    @GetMapping("getAllFeedbackByComment/{houseId}")
+    public List<Feedback> getAllFeedbackByComment(@PathVariable int houseId){
+        return iFeedBackService.getAllFeedbackByComment(houseId);
     }
 }

@@ -82,6 +82,11 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    public Account findByName(String username) {
+        return iAccountRepository.getAccountByUsername(username);
+    }
+
+    @Override
     public Account findAccountAdmin() {
         return  iAccountRepository.findAccountByRole(1).get(0);
     }
@@ -94,6 +99,10 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public List<Account> findAccountsYouMessaged(int idAccount) {
         return iAccountRepository.findAccountsYouMessaged(idAccount);
+
+    }
+    public Account findAccountByPassword(String password) {
+        return iAccountRepository.findAccountByPassword(password);
     }
 
 
