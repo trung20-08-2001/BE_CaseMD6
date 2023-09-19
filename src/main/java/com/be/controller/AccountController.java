@@ -68,13 +68,20 @@ public class AccountController {
         return iAccountService.findAccountAdmin();
     }
 
-    @GetMapping("/findAccountHost")
-    public List<Account> findAccountHost(){
-        return  iAccountService.findAccountHost();
+    @GetMapping("/findAccountHost/{username}")
+    public List<Account> findAccountHostByUsername(@PathVariable String username){
+        return  iAccountService.findAccountHostByUsername(username);
     }
 
     @GetMapping("/findAccountsUserMessageToAccountHost/{idAccountHost}")
-    private List<Account> findAccountsUserMessageToAccountHost(@PathVariable int idAccountHost){
+    public List<Account> findAccountsUserMessageToAccountHost(@PathVariable int idAccountHost){
         return  iMessageService.findAccountsUserMessageToAccountHost(idAccountHost);
     }
+
+    @GetMapping("/findAccountsYouMessaged/{idAccount}")
+    public List<Account> findAccountsYouMessaged(@PathVariable int idAccount){
+        return iAccountService.findAccountsYouMessaged(idAccount);
+    }
+
+
 }

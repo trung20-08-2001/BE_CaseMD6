@@ -87,10 +87,14 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public List<Account> findAccountHost() {
-        return iAccountRepository.findAccountByRole(2);
+    public List<Account> findAccountHostByUsername(String username) {
+        return iAccountRepository.findAccountHostByUsername(username);
     }
 
+    @Override
+    public List<Account> findAccountsYouMessaged(int idAccount) {
+        return iAccountRepository.findAccountsYouMessaged(idAccount);
+    }
 
 
     @Override

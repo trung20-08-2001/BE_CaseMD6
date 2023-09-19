@@ -26,6 +26,7 @@ public interface IAccountService extends UserDetailsService {
     List<Account> findAllByRole(int role_id);
 
     Account findAccountAdmin();
-    List<Account> findAccountHost();
+    List<Account> findAccountHostByUsername(String username);
 
+    List<Account> findAccountsYouMessaged(int idAccount);
 }
