@@ -31,6 +31,6 @@ public interface IHouseRepository extends JpaRepository<House, Integer> {
     @Query("select h from House h where h.id= :houseId")
     House findById(@Param("houseId")int houseId);
 
-    @Query(value = "select h from House h order by  h.id desc")
+    @Query(value = "select h from House h where h.status.id!=3 order by  h.id desc ")
     List<House> findAllHouse();
 }

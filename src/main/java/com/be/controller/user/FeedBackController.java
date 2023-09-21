@@ -30,6 +30,6 @@ public class FeedBackController {
 
     @GetMapping("/findFeedbackByHouseAndUser/{idUser}/{idHouse}")
     public Feedback checkConditionsFeedback(@PathVariable int idUser, @PathVariable int idHouse){
-        return iFeedBackService.findFeedbackByHouseAndUser(idUser, idHouse);
+        return iFeedBackService. findFeedbackByHouseAndUser(idUser, idHouse);
     }
 }
