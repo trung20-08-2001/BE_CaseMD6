@@ -1,4 +1,4 @@
-package com.be.controller.chat;
+package com.be.controller.socket;
 
 import com.be.model.Account;
 import com.be.model.Message;
@@ -21,7 +21,9 @@ public class MessageController {
     }
 
     @PostMapping("/save")
-    private void save(@RequestBody Message message){
-        iMessageService.save(message);
+    private Message save(@RequestBody Message message){
+      return   iMessageService.save(message);
     }
+
+
 }

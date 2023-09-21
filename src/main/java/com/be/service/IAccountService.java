@@ -27,7 +27,8 @@ public interface IAccountService extends UserDetailsService {
     Account findByName(String username);
 
     Account findAccountAdmin();
-    List<Account> findAccountHost();
+    List<Account> findAccountHostByUsername(String username);
     Account findAccountByPassword(String password);
 
+    List<Account> findAccountsYouMessaged(int idAccount);
 }
