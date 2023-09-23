@@ -45,7 +45,7 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     @Query("select a from Account a where a.role.id= :role_id")
     List<Account> findAccountByRole(@Param("role_id") int role_id);
 
-    @Query(value = "select DISTINCT a from Account a join Message m on (a.id=m.receiverAccount.id or a.id=m.senderAccount.id) where a.id!=:idAccount order by  a.role.id asc ")
+    @Query(value = "select DISTINCT a from Account a join Message m on (a.id=m.receiverAccount.id or a.id=m.senderAccount.id) where (m.senderAccount.id=:idAccount or m.receiverAccount.id=:idAccount) and a.id!=:idAccount and a.role.id!=1")
     List<Account> findAccountsYouMessaged(@Param("idAccount") int idAccount);
 
     @Query("SELECT a FROM Account a WHERE a.username LIKE %:username% and (a.role.id=2 or a.role.name='ROLE_HOST') and (a.status.name!='BLOCKED' or a.status.id!=3)")

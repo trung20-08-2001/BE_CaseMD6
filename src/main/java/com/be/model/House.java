@@ -1,6 +1,7 @@
 package com.be.model;
 import lombok.Data;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class House {
     private int numberOfHire;
     @Column(columnDefinition = "TEXT")
     private String description;
-    private double price;
+    @Column(columnDefinition = "decimal(38,0) default 0")
+    private BigDecimal price;
     @ManyToOne
     private Status status;
     @ManyToOne

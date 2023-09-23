@@ -2,6 +2,7 @@ package com.be.model;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Data
@@ -12,8 +13,8 @@ public class Bill {
     private int id;
     private Date dateCheckin;
     private Date dateCheckout;
-    @Column(columnDefinition = "double default 0")
-    private double totalPrice;
+    @Column(columnDefinition = "decimal(38,0) default 0")
+    private BigDecimal totalPrice;
     @ManyToOne
     private Account user;
     @ManyToOne
