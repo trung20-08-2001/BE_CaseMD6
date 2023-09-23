@@ -27,9 +27,4 @@ public class ImageServiceImpl implements IImageService {
         iImageRepository.deleteAllInBatch(idHouse);
         iImageRepository.saveAll(images);
     }
-
-    @Override
-    public List<Image> findImageBanner() {
-        return iImageRepository.findImageBanner();
-    }
 }

@@ -23,8 +23,4 @@ public class ImageController {
         iImageService.updateImageHouse(idHouse,images);
     }
 
-    @GetMapping("/findImageBanner")
-    public List<Image> findImageBanner(){
-        return iImageService.findImageBanner();
-    }
 }
