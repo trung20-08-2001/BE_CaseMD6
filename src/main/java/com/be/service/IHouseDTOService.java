@@ -11,4 +11,6 @@ public interface IHouseDTOService {
     HouseDTO findHouseDTOByHouse(int idHouse);
 
     List<HouseDTO> findAllHouseDTO();
+
+    List<HouseDTO> findHouseDTOBySearchVolumes();
 }

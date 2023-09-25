@@ -29,10 +29,6 @@ public class UserTransactionHistoryImpl implements IUserTransactionHistoryServic
         return iStatusRepository.findById(id);
     }
 
-    public List<Bill> findAllByBill_User(Account user) {
-        return iBillRepository.findBillByAccountId(user.getId());
-    }
-
     @Override
     public List<UserTransactionHistoryDTO> findAllBill_User(Account user) {
         List<UserTransactionHistoryDTO> userTransactionHistoryDTOList = new ArrayList<>();

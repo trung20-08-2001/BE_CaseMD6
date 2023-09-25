@@ -37,7 +37,7 @@ public class HouseController {
     }
 
     @GetMapping("/findTopHouse")
-    public List<HouseDTO> findTopHouse() {
+    public List<HouseDTO> findTopHouse() throws InterruptedException {
         return iHouseDTOService.findTopHouseDTO();
     }
 
@@ -106,6 +106,11 @@ public class HouseController {
         } else {
             return null;
         }
+    }
+
+    @GetMapping("/findTopSearch")
+    public List<HouseDTO> findTopSearch(){
+        return iHouseDTOService.findHouseDTOBySearchVolumes();
     }
 
 }

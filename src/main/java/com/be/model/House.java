@@ -16,6 +16,8 @@ public class House {
     private int numberOfBedrooms;
     private int numberOfLivingRooms;
     private int numberOfHire;
+    @Column(columnDefinition = "integer default 0")
+    private int searchVolume;
     @Column(columnDefinition = "TEXT")
     private String description;
     @Column(columnDefinition = "decimal(38,0) default 0")
