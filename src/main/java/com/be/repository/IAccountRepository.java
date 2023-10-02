@@ -39,7 +39,7 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "update Account set status_id = :status_id where id = :idAccount", nativeQuery = true)
+    @Query(value = "update account set status_id = :status_id where id = :idAccount", nativeQuery = true)
     void updateStatus(@Param("status_id") int status_id, @Param("idAccount") int idAccount);
 
     @Query("select a from Account a where a.role.id= :role_id")

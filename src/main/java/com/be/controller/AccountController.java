@@ -82,6 +82,4 @@ public class AccountController {
     public List<Account> findAccountsYouMessaged(@PathVariable int idAccount){
         return iAccountService.findAccountsYouMessaged(idAccount);
     }
-
-
 }

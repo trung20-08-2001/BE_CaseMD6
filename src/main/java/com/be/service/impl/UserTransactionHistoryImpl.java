@@ -2,7 +2,6 @@ package com.be.service.impl;
 
 import com.be.model.*;
 import com.be.model.dto.UserTransactionHistoryDTO;
-import com.be.repository.IBillDetailRepository;
 import com.be.repository.IBillRepository;
 import com.be.repository.IStatusRepository;
 import com.be.service.IAccountService;
@@ -15,8 +14,6 @@ import java.util.List;
 
 @Service
 public class UserTransactionHistoryImpl implements IUserTransactionHistoryService {
-    @Autowired
-    IBillDetailRepository iBillDetailRepository;
     @Autowired
     IStatusRepository iStatusRepository;
     @Autowired

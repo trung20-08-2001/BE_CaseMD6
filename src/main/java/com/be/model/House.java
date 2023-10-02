@@ -28,5 +28,4 @@ public class House {
     private Category category;
     @ManyToOne
     private Account account;
-
 }

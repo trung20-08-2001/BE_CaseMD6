@@ -2,11 +2,14 @@ package com.be.service.impl;
 
 import com.be.model.House;
 import com.be.model.Image;
+import com.be.model.dto.CustomPage;
 import com.be.model.dto.HouseDTO;
 import com.be.repository.IHouseRepository;
 import com.be.repository.IImageRepository;
 import com.be.service.IHouseDTOService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +44,7 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
 
     @Override
     public List<HouseDTO> findTopHouseDTO() {
-        List<House> houses = entityManager.createQuery("select h from House h order by h.numberOfHire desc ",House.class).setMaxResults(3).getResultList();
+        List<House> houses = entityManager.createQuery("select h from House h where h.status.id!=3 order by h.numberOfHire desc ",House.class).setMaxResults(3).getResultList();
         return findHouseDTOs(houses);
     }
 
@@ -54,9 +57,10 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
     }
 
     @Override
-    public List<HouseDTO> findAllHouseDTO() {
-        List<House> houses=iHouseRepository.findAllHouse();
-        return findHouseDTOs(houses);
+    public CustomPage<HouseDTO> findAllHouseDTO(Pageable pageable) {
+        Page<House> housePage=iHouseRepository.findAllHouse(pageable);
+        List<HouseDTO> houseDTOs=findHouseDTOs(housePage.getContent());
+        return new CustomPage<>(houseDTOs,housePage.getTotalPages(),housePage.getNumber());
     }
 
     @Override

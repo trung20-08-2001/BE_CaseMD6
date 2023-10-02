@@ -2,7 +2,6 @@ package com.be.service.impl;
 
 import com.be.model.*;
 import com.be.model.dto.VendorTransactionHistoryDTO;
-import com.be.repository.IBillDetailRepository;
 import com.be.repository.IBillRepository;
 import com.be.repository.IStatusRepository;
 
@@ -15,8 +14,6 @@ import java.util.List;
 
 @Service
 public class VendorTransactionHistoryDTOImpl implements IVendorTransactionHistoryDTOService {
-    @Autowired
-    IBillDetailRepository iBillDetailRepository;
     @Autowired
     IBillRepository iBillRepository;
     @Autowired
