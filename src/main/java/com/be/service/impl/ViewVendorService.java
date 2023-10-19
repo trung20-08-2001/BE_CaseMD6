@@ -45,7 +45,7 @@ public class ViewVendorService implements IViewVendor {
         List<Status> statuses = iStatusRepository.findAll();
         List<ViewVendor> viewVendors = new ArrayList<>();
         ViewVendor viewVendor;
-        for (Account account : iAccountRepository.findAll()) {
+        for (Account account : iAccountRepository.findAllByIdDesc()) {
             if (((account.getStatus().getId() == 2) && (account.getRole().getId() == 3)) || account.getRole().getId() == 2) {
                 Double totalPrice = getTotalPriceByAccount(account);
                 double resultPrice = (totalPrice != null) ? totalPrice : 0;

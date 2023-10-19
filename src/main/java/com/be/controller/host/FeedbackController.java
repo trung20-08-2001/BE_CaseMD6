@@ -36,28 +36,7 @@ public class FeedbackController {
     IBillService iBillService;
     @Autowired
     IFeedBackService iFeedBackService;
-    @PostMapping("/register")
-    public ResponseEntity<Account> createHostAcc(@RequestBody Account account) {
-        Role role = iRoleRepository.findByName("ROLE_HOST");
-        account.setRole(role);
-        iAccountService.saveAccount(account);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
-    }
 
-    @GetMapping("/listhost/{accountId}")
-    public List<Account> getAllAccountByRole(@PathVariable int accountId) {
-        Account account = iAccountService.findById(accountId);
-        if (account.getRole().getId() == 1) {
-            return iAccountService.findAllByRole(2);
-        } else {
-            return null;
-        }
-    }
-
-    @GetMapping("/findRevenueOfHost/{idHost}")
-    public List<Revenue> findRevenueOfHost(@PathVariable int idHost){
-        return iBillService.findRevenueOfHost(idHost);
-    }
 
     @GetMapping("getAllFeedback/{houseId}")
     public List<Feedback> getAllByHouseId(@PathVariable int houseId) {

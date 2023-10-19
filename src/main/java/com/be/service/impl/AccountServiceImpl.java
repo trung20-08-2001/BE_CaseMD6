@@ -82,11 +82,6 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public Account findByName(String username) {
-        return iAccountRepository.getAccountByUsername(username);
-    }
-
-    @Override
     public Account findAccountAdmin() {
         return  iAccountRepository.findAccountByRole(1).get(0);
     }
@@ -125,5 +120,10 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public List<House> findByNameAndStatus(int idAccount, String name, String nameStatus) {
         return iAccountRepository.findByNameAndStatus(idAccount, name, nameStatus);
+    }
+
+    @Override
+    public void updateAccountToHost(int roleId,int statusId,int accountId){
+        iAccountRepository.updateAccountToHost(roleId, statusId, accountId);
     }
 }

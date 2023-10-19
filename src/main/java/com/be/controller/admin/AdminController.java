@@ -44,24 +44,6 @@ public class AdminController {
         iAccountService.updateStatus(status_id, idAccount);
     }
 
-    @PostMapping("registration/req/{accountId}")
-    public ResponseEntity<Account> registerAsHost(@PathVariable int accountId,
-                                                  @RequestBody Account account) {
-        Account account1 = iAccountService.findById(accountId);
-        if (account1 != null) {
-            account.setId(accountId);
-            Status status = iStatusRepository.findById(2);
-            account.setStatus(status);
-            account.setRole(account1.getRole());
-            account.setAvatar(account1.getAvatar());
-            account.setPassword(account1.getPassword());
-            account.setUsername(account1.getUsername());
-            iAccountService.saveAccount(account);
-            return new ResponseEntity<>(account, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
     @PostMapping("registration/approve/{accountId}")
     public ResponseEntity<Account> approveRegistration(@PathVariable int accountId,
@@ -114,6 +96,5 @@ public class AdminController {
             return null;
         }
     }
-
 
 }

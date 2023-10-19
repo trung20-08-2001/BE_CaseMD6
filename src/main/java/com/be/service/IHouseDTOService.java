@@ -13,4 +13,7 @@ public interface IHouseDTOService {
     HouseDTO findHouseDTOByHouse(int idHouse);
     CustomPage<HouseDTO> findAllHouseDTO(Pageable pageable);
     List<HouseDTO> findHouseDTOBySearchVolumes();
+    List<HouseDTO> findHouseDTOPageSearch();
+    HouseDTO findHouseDTOById(int houseId);
+    House saveHouse(House house);
 }

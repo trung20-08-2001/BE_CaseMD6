@@ -1,4 +1,5 @@
 package com.be.config;
+
 import com.be.config.filter.JwtAuthenticationFilter;
 import com.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     IAccountService accountService;
     @Autowired
     JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
-
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("**").permitAll()
-                .antMatchers("/admin**").hasRole("ADMIN")
+        http.authorizeRequests()
+                .antMatchers(
+                        "/order/**",
+                        "/accounts/**",
+                        "/houses/**",
+                        "/feedBack/**",
+                        "/api/login",
+                        "/loginBySocialNetwork",
+                        "/notifications/**",
+                        "/ws/**")
+                .permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers(
+                        "/categories/**",
+                        "/api/feedback/**",
+                        "/images/**",
+                        "/bills_vendor/**",
+                        "/host/**"
+                ).hasRole("HOST")
+                .antMatchers(
+                        "/registration/**")
+                .hasRole("USER")
+                .antMatchers("/messages/**","/bills_user/**")
+                .hasAnyRole("ADMIN", "USER","HOST")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -41,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(accountService).passwordEncoder(NoOpPasswordEncoder.getInstance());

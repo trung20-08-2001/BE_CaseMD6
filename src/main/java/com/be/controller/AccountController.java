@@ -22,11 +22,6 @@ public class AccountController {
     @Autowired
     IMessageService iMessageService;
 
-    @GetMapping
-    public List<Account> getAll() {
-        return iAccountService.findAll();
-    }
-
     @PostMapping("/createAccount")
     public void create(@RequestBody Account account) {
         iAccountService.saveAccount(account);

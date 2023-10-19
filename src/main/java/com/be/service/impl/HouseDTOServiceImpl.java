@@ -20,6 +20,7 @@ import java.util.List;
 @Repository
 @Service
 public class HouseDTOServiceImpl implements IHouseDTOService {
+
     @PersistenceContext
     private EntityManager entityManager;
     @Autowired
@@ -31,6 +32,14 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
         List<HouseDTO> result = new ArrayList<>();
         for (int i = 0; i < houses.size(); i++) {
             List<Image> images = iImageRepository.findImageByIdHouse(houses.get(i).getId());
+            if(images.isEmpty()) {
+                Image image = new Image();
+                image.setId(1);
+                image.setType("HOUSE");
+                image.setHouse(houses.get(i));
+                image.setUrl("https://afdevinfo.com/wp-content/uploads/2017/10/thiet-ke-hinh-ngoi-nha-dep.jpg");
+                images.add(image);
+            }
             result.add(new HouseDTO(houses.get(i), images));
         }
         return result;
@@ -65,7 +74,33 @@ public class HouseDTOServiceImpl implements IHouseDTOService {
 
     @Override
     public List<HouseDTO> findHouseDTOBySearchVolumes() {
-        List<House> houses=entityManager.createQuery("select h from House h order by h.searchVolume desc,h.numberOfHire desc ", House.class).setMaxResults(8).getResultList();
+        List<House> houses=entityManager.createQuery("select h from House h order by h.searchVolume desc,h.numberOfHire desc ", House.class).setMaxResults(4).getResultList();
         return findHouseDTOs(houses);
+    }
+
+    @Override
+    public List<HouseDTO> findHouseDTOPageSearch() {
+       List<House> houses=iHouseRepository.getAllHouse();
+       return findHouseDTOs(houses);
+    }
+
+    @Override
+    public HouseDTO findHouseDTOById(int houseId) {
+        House house = iHouseRepository.findById(houseId);
+        List<Image> images = iImageRepository.findImageByIdHouse(house.getId());
+        if(images.isEmpty()) {
+            Image image = new Image();
+            image.setId(1);
+            image.setType("HOUSE");
+            image.setHouse(house);
+            image.setUrl("https://afdevinfo.com/wp-content/uploads/2017/10/thiet-ke-hinh-ngoi-nha-dep.jpg");
+            images.add(image);
+        }
+        return new HouseDTO(house, images);
+    }
+
+    @Override
+    public House saveHouse(House house) {
+        return iHouseRepository.save(house);
     }
 }

@@ -52,4 +52,12 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
     List<Account> findAccountHostByUsername(@Param("username") String username);
     @Query("select a from Account a where a.password= :password")
     Account findAccountByPassword(@Param("password") String password);
+
+    @Query(value = "select a from Account a order by a.id desc")
+    List<Account> findAllByIdDesc();
+
+    @Modifying
+    @Transactional
+    @Query(value = "update Account a set a.role.id=:roleId, a.status.id=:statusId where a.id=:accountId")
+    void updateAccountToHost(@Param("roleId") int roleId, @Param("statusId") int statusId, @Param("accountId") int accountId);
 }

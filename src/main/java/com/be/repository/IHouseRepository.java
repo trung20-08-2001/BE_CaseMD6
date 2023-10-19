@@ -33,4 +33,7 @@ public interface IHouseRepository extends JpaRepository<House, Integer> {
 
     @Query(value = "select h from House h  where h.status.id!=3")
     Page<House> findAllHouse(Pageable pageable);
+
+    @Query(value = "select h from House h  where h.status.id!=3")
+    List<House> getAllHouse();
 }

@@ -6,10 +6,7 @@ import com.be.model.House;
 import com.be.model.Status;
 import com.be.model.dto.VendorTransactionHistoryDTO;
 import com.be.repository.IBillRepository;
-import com.be.service.IAccountService;
-import com.be.service.IHouseService;
-import com.be.service.IUserTransactionHistoryService;
-import com.be.service.IVendorTransactionHistoryDTOService;
+import com.be.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +23,9 @@ public class VendorTransactionHistoryDTOController {
     @Autowired
     IAccountService iAccountService;
     @Autowired
-    IHouseService iHouseService;
-    @Autowired
     IBillRepository iBillRepository;
+    @Autowired
+    IHouseDTOService iHouseDTOService;
 
     @GetMapping("/{id}")
     public List<VendorTransactionHistoryDTO> findAllBill_Vendor(@PathVariable int id) {
@@ -41,7 +38,7 @@ public class VendorTransactionHistoryDTOController {
         House house1 = iUserTransactionHistoryService.findHouseByBillId(id);
         Status status = house.getStatus();
         house1.setStatus(status);
-        return iHouseService.save(house1);
+        return iHouseDTOService.saveHouse(house1);
     }
 
     @PostMapping("/{id}/bill")

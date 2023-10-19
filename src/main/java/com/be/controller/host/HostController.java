@@ -10,9 +10,7 @@ import com.be.repository.IAccountRepository;
 import com.be.repository.IBillRepository;
 import com.be.repository.IRoleRepository;
 import com.be.repository.IStatusRepository;
-import com.be.service.IAccountService;
-import com.be.service.IBillService;
-import com.be.service.JwtService;
+import com.be.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,41 +26,32 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("host")
 public class HostController {
     @Autowired
-    IAccountService iAccountService;
-    @Autowired
-    IRoleRepository iRoleRepository;
-    @Autowired
-    JwtService jwtService;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    IStatusRepository iStatusRepository;
-    @Autowired
     IBillService iBillService;
-
-    @PostMapping("/register")
-    public ResponseEntity<Account> createHostAcc(@RequestBody Account account) {
-        Role role = iRoleRepository.findByName("ROLE_HOST");
-        account.setRole(role);
-        iAccountService.saveAccount(account);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
+    @Autowired
+    private IHouseDTOService iHouseDTOService;
+    @PostMapping("/saveHouse")
+    public House save(@RequestBody House house) {
+        return iHouseDTOService.saveHouse(house);
     }
-
-    @GetMapping("/listhost/{accountId}")
-    public List<Account> getAllAccountByRole(@PathVariable int accountId) {
-        Account account = iAccountService.findById(accountId);
-        if (account.getRole().getId() == 1) {
-            return iAccountService.findAllByRole(2);
-        } else {
-            return null;
-        }
-    }
-
     @GetMapping("/findRevenueOfHost/{idHost}")
     public List<Revenue> findRevenueOfHost(@PathVariable int idHost){
         return iBillService.findRevenueOfHost(idHost);
+    }
+    @GetMapping("/findHouseByAccount/{idAccount}")
+    public List<HouseDTO> findHouseByAccount(@PathVariable int idAccount) {
+        return iHouseDTOService.findHouseDTOByAccount(idAccount);
+    }
+    @GetMapping("houseDetail/{houseId}")
+    public ResponseEntity<HouseDTO> getHouseById(@PathVariable int houseId) {
+        HouseDTO houseDTO = iHouseDTOService.findHouseDTOById(houseId);
+        if (houseDTO != null) {
+            return new ResponseEntity<>(houseDTO, HttpStatus.OK);
+        } else {
+            return null;
+        }
     }
 
 }
